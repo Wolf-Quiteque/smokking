@@ -1,11 +1,18 @@
+'use client';
+
+import { useState } from 'react';
+
 export default function Home() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
    <>
+   
     {/* main-slider */}
     <section className="main-slider style-two">
         <div className="main-slider-carousel owl-theme owl-carousel owl-dots-none">
             <div className="slide-item">
-                <div className="image-layer" style={{ backgroundImage: 'url(/images/banner/banner-4.jpg)' }}></div>
+                <div className="image-layer" style={{ backgroundImage: 'url(/images/banner/banner-4.webp)' }}></div>
                 <div className="auto-container">
                     <div className="content-box centred">
                         <h1>Kingz Smoke Ringz BBQ</h1>
@@ -17,7 +24,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="slide-item">
-                <div className="image-layer" style={{ backgroundImage: 'url(/images/banner/banner-5.jpg)' }}></div>
+                <div className="image-layer" style={{ backgroundImage: 'url(/images/banner/banner-5.webp)' }}></div>
                 <div className="auto-container">
                     <div className="content-box">
                         <h1>Premium Brisket & Ribs</h1>
@@ -29,7 +36,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="slide-item">
-                <div className="image-layer" style={{ backgroundImage: 'url(/images/banner/banner-6.jpg)' }}></div>
+                <div className="image-layer" style={{ backgroundImage: 'url(/images/banner/banner-6.webp)' }}></div>
                 <div className="auto-container">
                     <div className="content-box centred">
                         <h1>Gourmet Catering & Retail</h1>
@@ -51,22 +58,22 @@ export default function Home() {
                 <div className="single-item">
                     <div className="inner-box">
                         <div className="icon-box"><i className="flaticon-meat-4"></i></div>
-                        <h3>Premium BBQ Meats</h3>
-                        <p>Slow-smoked brisket, ribs, and pulled pork - melt-in-your-mouth perfection</p>
+                        <h3>Kingz Smoke Ringz BBQ</h3>
+                        <p>Food Service at 12423 Hamill Path Drive - Extensive menu, online ordering for pickup</p>
                     </div>
                 </div>
                 <div className="single-item">
                     <div className="inner-box">
                         <div className="icon-box"><i className="flaticon-hang"></i></div>
-                        <h3>Gourmet Catering</h3>
-                        <p>Corporate events with gourmet samples served in martini glasses</p>
+                        <h3>Kingz Smoke Ringz BBQ Gourmet/Corporate</h3>
+                        <p>Catering Service - Event-based - Curated by Chef Glenn R. Paxton; serves upscale samples in martini glasses</p>
                     </div>
                 </div>
                 <div className="single-item">
                     <div className="inner-box">
                         <div className="icon-box"><i className="flaticon-meat-5"></i></div>
-                        <h3>BBQ Supplies</h3>
-                        <p>Premium rubs and sauces from top brands for your home smoking</p>
+                        <h3>Kingz Smoke Ringz BBQ Supply</h3>
+                        <p>Retail E-commerce at 235 Jungermann Road - Sells branded and third-party rubs and sauces</p>
                     </div>
                 </div>
             </div>
@@ -117,7 +124,6 @@ export default function Home() {
                                     Community Favorite
                                 </li>
                             </ul>
-                            <div className="link-box"><a href="about">Learn more about our story<i className="flaticon-right"></i></a></div>
                         </div>
                     </div>
                 </div>
@@ -127,37 +133,50 @@ export default function Home() {
     {/* about-style-two end */}
 
     {/* service-style-two */}
-    <section className="service-style-two centred bg-color-4">
+    <section className="about-style-two bg-color-6">
         <div className="auto-container">
-            <div className="row clearfix">
-                <div className="col-lg-4 col-md-6 col-sm-12 service-block">
-                    <div className="service-block-two wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                        <div className="inner-box">
-                            <div className="icon-box"><i className="flaticon-mutton"></i></div>
-                            <h3><a href="packages">3-Month Event Package</a></h3>
-                            <p>Perfect for quarterly corporate events and celebrations</p>
-                            <div className="link"><a href="packages">See Savings<i className="fas fa-long-arrow-alt-right"></i></a></div>
+            <div className="row align-items-center clearfix">
+                <div className="col-lg-6 col-md-12 col-sm-12 content-column">
+                    <div id="content_block_2">
+                        <div className="content-box">
+                            <div className="sec-title style-two">
+                                <span>Catering Services</span>
+                                <h2>Gourmet Catering & Corporate Events</h2>
+                            </div>
+                            <div className="text">
+                                <p>Elevating Your Event with Curated Barbecue Cuisine. We offer a tailored, upscale catering experience, not just food. Our gourmet samples served in martini glasses provide a sophisticated presentation. Perfect for corporate events, private parties, and special occasions.</p>
+                            </div>
+                            <ul className="list clearfix">
+                                <li>
+                                    <i className="flaticon-call-center-agent"></i>
+                                    Curated Experience
+                                </li>
+                                <li>
+                                    <i className="flaticon-free-delivery"></i>
+                                    Gourmet Samples
+                                </li>
+                                <li>
+                                    <i className="flaticon-return-of-investment"></i>
+                                    Corporate Events
+                                </li>
+                                <li>
+                                    <i className="flaticon-winner"></i>
+                                    Private Parties
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div className="col-lg-4 col-md-6 col-sm-12 service-block">
-                    <div className="service-block-two wow fadeInUp animated animated" data-wow-delay="300ms" data-wow-duration="1500ms">
-                        <div className="inner-box">
-                            <div className="icon-box"><i className="flaticon-meat-1"></i></div>
-                            <h3><a href="packages">6-Month Event Package</a></h3>
-                            <p>Ideal for bi-annual gatherings and special occasions</p>
-                            <div className="link"><a href="packages">See Savings<i className="fas fa-long-arrow-alt-right"></i></a></div>
+                <div className="col-lg-6 col-md-12 col-sm-12 image-column">
+                    <div id="image_block_1">
+                        <div className="image-box">
+                            <figure  style={{marginTop: '30px'}} className="image image-1"><img src="/images/resource/catering.webp" alt="" /></figure>
+                       <div className="more-btn centred" style={{marginTop: '60px'}}>
+                <button onClick={() => setModalOpen(true)} className="theme-btn">Book Now</button>
+            </div>
                         </div>
-                    </div>
-                </div>
-                <div className="col-lg-4 col-md-6 col-sm-12 service-block">
-                    <div className="service-block-two wow fadeInUp animated animated" data-wow-delay="600ms" data-wow-duration="1500ms">
-                        <div className="inner-box">
-                            <div className="icon-box"><i className="flaticon-meatloaf"></i></div>
-                            <h3><a href="packages">12-Month Event Package</a></h3>
-                            <p>Complete annual event planning with maximum savings</p>
-                            <div className="link"><a href="packages">See Savings<i className="fas fa-long-arrow-alt-right"></i></a></div>
-                        </div>
+
+                        
                     </div>
                 </div>
             </div>
@@ -401,6 +420,87 @@ export default function Home() {
         </div>
     </section>
     {/* news-style-two end */}
+
+    {/* Catering Booking Modal */}
+    <div className={`modal fade ${modalOpen ? 'show' : ''}`} style={{ display: modalOpen ? 'block' : 'none' }} tabIndex="-1" role="dialog">
+      <div className="modal-dialog modal-lg" role="document">
+        <div className="modal-content" style={{ backgroundColor: '#f8f9fa', borderRadius: '15px', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}>
+          <div className="modal-header" style={{ backgroundImage: 'url(/images/icons/bg-icon-1.png)', backgroundSize: 'cover', color: 'white', borderRadius: '15px 15px 0 0' }}>
+            <h5 className="modal-title">Book Your Catering Event</h5>
+            <button type="button" className="close" onClick={() => setModalOpen(false)} style={{ color: 'white' }}>
+              <span>&times;</span>
+            </button>
+          </div>
+          <div className="modal-body" style={{ padding: '30px' }}>
+            <form>
+              <div className="row">
+                <div className="col-md-6 mb-3">
+                  <div className="form-group" style={{ position: 'relative' }}>
+                    <label htmlFor="name" style={{ fontWeight: 'bold' }}>Name</label>
+                    <input type="text" className="form-control" id="name" placeholder="Your Name" style={{ borderRadius: '10px', paddingLeft: '40px' }} />
+                    <i className="fas fa-user" style={{ position: 'absolute', left: '10px', top: '60%', transform: 'translateY(-50%)', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
+                  </div>
+                </div>
+                <div className="col-md-6 mb-3">
+                  <div className="form-group" style={{ position: 'relative' }}>
+                    <label htmlFor="email" style={{ fontWeight: 'bold' }}>Email</label>
+                    <input type="email" className="form-control" id="email" placeholder="your@email.com" style={{ borderRadius: '10px', paddingLeft: '40px' }} />
+                    <i className="fas fa-envelope" style={{ position: 'absolute', left: '10px', top: '60%', transform: 'translateY(-50%)', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
+                  </div>
+                </div>
+                <div className="col-md-6 mb-3">
+                  <div className="form-group" style={{ position: 'relative' }}>
+                    <label htmlFor="phone" style={{ fontWeight: 'bold' }}>Phone</label>
+                    <input type="tel" className="form-control" id="phone" placeholder="(123) 456-7890" style={{ borderRadius: '10px', paddingLeft: '40px' }} />
+                    <i className="fas fa-phone" style={{ position: 'absolute', left: '10px', top: '60%', transform: 'translateY(-50%)', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
+                  </div>
+                </div>
+                <div className="col-md-6 mb-3">
+                  <div className="form-group" style={{ position: 'relative' }}>
+                    <label htmlFor="eventDate" style={{ fontWeight: 'bold' }}>Event Date</label>
+                    <input type="date" className="form-control" id="eventDate" style={{ borderRadius: '10px', paddingLeft: '40px' }} />
+                    <i className="fas fa-calendar" style={{ position: 'absolute', left: '10px', top: '60%', transform: 'translateY(-50%)', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
+                  </div>
+                </div>
+                <div className="col-md-6 mb-3">
+                  <div className="form-group" style={{ position: 'relative' }}>
+                    <label htmlFor="guests" style={{ fontWeight: 'bold' }}>Estimated Guests</label>
+                    <input type="number" className="form-control" id="guests" placeholder="50" style={{ borderRadius: '10px', paddingLeft: '40px' }} />
+                    <i className="fas fa-users" style={{ position: 'absolute', left: '10px', top: '60%', transform: 'translateY(-50%)', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
+                  </div>
+                </div>
+                <div className="col-md-6 mb-3">
+                  <div className="form-group" style={{ position: 'relative' }}>
+                    <label htmlFor="eventType" style={{ fontWeight: 'bold' }}>Event Type</label>
+                    <select className="form-control" id="eventType" style={{ borderRadius: '10px', paddingLeft: '40px' }}>
+                      <option value="">Select Event Type</option>
+                      <option value="corporate">Corporate Event</option>
+                      <option value="wedding">Wedding</option>
+                      <option value="birthday">Birthday Party</option>
+                      <option value="private">Private Party</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <i className="fas fa-glass-cheers" style={{ position: 'absolute', left: '10px', top: '60%', transform: 'translateY(-50%)', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
+                  </div>
+                </div>
+                <div className="col-12 mb-3">
+                  <div className="form-group" style={{ position: 'relative' }}>
+                    <label htmlFor="message" style={{ fontWeight: 'bold' }}>Special Requests</label>
+                    <textarea className="form-control" id="message" rows="4" placeholder="Any dietary restrictions, special requests, or additional details..." style={{ borderRadius: '10px', paddingLeft: '40px' }}></textarea>
+                    <i className="fas fa-comment" style={{ position: 'absolute', left: '10px', top: '40px', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer" style={{ justifyContent: 'center', borderTop: 'none' }}>
+                <button type="submit" className="btn btn-primary btn-lg" style={{ backgroundColor: '#d9534f', borderColor: '#d9534f', borderRadius: '25px', padding: '10px 30px', marginRight: '10px' }}>Submit Inquiry</button>
+                <button type="button" className="btn btn-secondary" onClick={() => setModalOpen(false)} style={{ borderRadius: '25px', padding: '10px 30px' }}>Close</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {modalOpen && <div className="modal-backdrop fade show" onClick={() => setModalOpen(false)}></div>}
 </>
   );
 }
