@@ -1,0 +1,110 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 30/05/2020 13:59
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("../fonts/Flaticon.eot");
+  src: url("../fonts/Flaticond41d.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/Flaticon.woff2") format("woff2"),
+       url("../fonts/Flaticon.woff") format("woff"),
+       url("../fonts/Flaticon.ttf") format("truetype"),
+       url("../fonts/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("../fonts/Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+  font-style: normal;
+}
+
+.flaticon-location-pin:before { content: "\f100"; }
+.flaticon-envelope:before { content: "\f101"; }
+.flaticon-dial:before { content: "\f102"; }
+.flaticon-list:before { content: "\f103"; }
+.flaticon-user-symbol-of-thin-outline:before { content: "\f104"; }
+.flaticon-search:before { content: "\f105"; }
+.flaticon-loupe:before { content: "\f106"; }
+.flaticon-shopping-cart:before { content: "\f107"; }
+.flaticon-shopping-cart-1:before { content: "\f108"; }
+.flaticon-hang:before { content: "\f109"; }
+.flaticon-butchery:before { content: "\f10a"; }
+.flaticon-food-and-restaurant:before { content: "\f10b"; }
+.flaticon-knife:before { content: "\f10c"; }
+.flaticon-meat:before { content: "\f10d"; }
+.flaticon-food-and-restaurant-1:before { content: "\f10e"; }
+.flaticon-apron:before { content: "\f10f"; }
+.flaticon-male-chef:before { content: "\f110"; }
+.flaticon-fork:before { content: "\f111"; }
+.flaticon-chicken-breast:before { content: "\f112"; }
+.flaticon-chicken-wings:before { content: "\f113"; }
+.flaticon-meat-1:before { content: "\f114"; }
+.flaticon-knife-1:before { content: "\f115"; }
+.flaticon-refrigerator:before { content: "\f116"; }
+.flaticon-glove:before { content: "\f117"; }
+.flaticon-refrigerator-1:before { content: "\f118"; }
+.flaticon-food-and-restaurant-2:before { content: "\f119"; }
+.flaticon-beef:before { content: "\f11a"; }
+.flaticon-knife-2:before { content: "\f11b"; }
+.flaticon-meat-2:before { content: "\f11c"; }
+.flaticon-steak:before { content: "\f11d"; }
+.flaticon-meat-3:before { content: "\f11e"; }
+.flaticon-food-and-restaurant-3:before { content: "\f11f"; }
+.flaticon-food-and-restaurant-4:before { content: "\f120"; }
+.flaticon-miscellaneous:before { content: "\f121"; }
+.flaticon-meat-4:before { content: "\f122"; }
+.flaticon-meat-claw:before { content: "\f123"; }
+.flaticon-meat-grinder:before { content: "\f124"; }
+.flaticon-pig:before { content: "\f125"; }
+.flaticon-mutton:before { content: "\f126"; }
+.flaticon-minced-meat:before { content: "\f127"; }
+.flaticon-mezzaluna:before { content: "\f128"; }
+.flaticon-meatloaf:before { content: "\f129"; }
+.flaticon-meatball:before { content: "\f12a"; }
+.flaticon-meat-slicer:before { content: "\f12b"; }
+.flaticon-meat-5:before { content: "\f12c"; }
+.flaticon-meat-6:before { content: "\f12d"; }
+.flaticon-salami:before { content: "\f12e"; }
+.flaticon-salt:before { content: "\f12f"; }
+.flaticon-sausages:before { content: "\f130"; }
+.flaticon-scale:before { content: "\f131"; }
+.flaticon-scissors:before { content: "\f132"; }
+.flaticon-turkey:before { content: "\f133"; }
+.flaticon-food-and-restaurant-5:before { content: "\f134"; }
+.flaticon-food-and-restaurant-6:before { content: "\f135"; }
+.flaticon-food-and-restaurant-7:before { content: "\f136"; }
+.flaticon-food-and-restaurant-8:before { content: "\f137"; }
+.flaticon-sink:before { content: "\f138"; }
+.flaticon-food-and-restaurant-9:before { content: "\f139"; }
+.flaticon-call-center-agent:before { content: "\f13a"; }
+.flaticon-free-delivery:before { content: "\f13b"; }
+.flaticon-return-of-investment:before { content: "\f13c"; }
+.flaticon-winner:before { content: "\f13d"; }
+.flaticon-right:before { content: "\f13e"; }
+.flaticon-left:before { content: "\f13f"; }
+.flaticon-left-1:before { content: "\f140"; }
+.flaticon-right-1:before { content: "\f141"; }
+.flaticon-quote:before { content: "\f142"; }
+.flaticon-notes:before { content: "\f143"; }
+.flaticon-flag:before { content: "\f144"; }
+.flaticon-medal:before { content: "\f145"; }
+.flaticon-speaker:before { content: "\f146"; }
+.flaticon-phone:before { content: "\f147"; }
+.flaticon-maps-and-flags:before { content: "\f148"; }
+.flaticon-paper-plane:before { content: "\f149"; }
+.flaticon-paper-plane-1:before { content: "\f14a"; }
+.flaticon-location:before { content: "\f14b"; }
+.flaticon-long-right-arrow:before { content: "\f14c"; }
+.flaticon-cart:before { content: "\f14d"; }
+.flaticon-telephone:before { content: "\f14e"; }
+.flaticon-mail:before { content: "\f14f"; }
