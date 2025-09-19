@@ -422,84 +422,268 @@ export default function Home() {
     {/* news-style-two end */}
 
     {/* Catering Booking Modal */}
-    <div className={`modal fade ${modalOpen ? 'show' : ''}`} style={{ display: modalOpen ? 'block' : 'none' }} tabIndex="-1" role="dialog">
-      <div className="modal-dialog modal-lg" role="document">
-        <div className="modal-content" style={{ backgroundColor: '#f8f9fa', borderRadius: '15px', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}>
-          <div className="modal-header" style={{ backgroundImage: 'url(/images/icons/bg-icon-1.png)', backgroundSize: 'cover', color: 'white', borderRadius: '15px 15px 0 0' }}>
-            <h5 className="modal-title">Book Your Catering Event</h5>
-            <button type="button" className="close" onClick={() => setModalOpen(false)} style={{ color: 'white' }}>
-              <span>&times;</span>
+ <div 
+  className={`modal fade ${modalOpen ? 'show' : ''}`} 
+  style={{ 
+    display: modalOpen ? 'block' : 'none', 
+    position: 'fixed', 
+    top: 0, 
+    left: 0, 
+    width: '100%', 
+    height: '100%', 
+    zIndex: 1050, 
+    overflowX: 'hidden', 
+    overflowY: 'auto', 
+    backgroundColor: modalOpen ? 'rgba(0,0,0,0.5)' : 'transparent',
+    transition: 'background-color 0.15s ease-out'
+  }} 
+  tabIndex="-1" 
+  role="dialog"
+  onClick={(e) => {
+    // Close modal when clicking outside content
+    if (e.target === e.currentTarget) {
+      setModalOpen(false);
+    }
+  }}
+>
+  <div className="modal-dialog modal-lg" role="document" style={{
+    margin: '20px auto',
+    maxWidth: '90%',
+    height: 'auto',
+    minHeight: '200px'
+  }}>
+    <div className="modal-content" style={{ 
+      backgroundColor: '#f8f9fa', 
+      borderRadius: '15px', 
+      boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+      maxHeight: '90vh',
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
+      <div className="modal-header" style={{ 
+        backgroundImage: 'url(/images/icons/bg-icon-1.png)', 
+        backgroundSize: 'cover', 
+        color: 'white', 
+        borderRadius: '15px 15px 0 0',
+        flexShrink: 0
+      }}>
+        <h5 className="modal-title">Book Your Catering Event</h5>
+        <button 
+          type="button" 
+          className="close" 
+          onClick={() => setModalOpen(false)} 
+          style={{ color: 'white' }}
+        >
+          <span>&times;</span>
+        </button>
+      </div>
+      <div className="modal-body" style={{ 
+        padding: '20px',
+        overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
+        flexGrow: 1
+      }}>
+        <form>
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <div className="form-group" style={{ position: 'relative' }}>
+                <label htmlFor="name" style={{ fontWeight: 'bold' }}>Name</label>
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  id="name" 
+                  placeholder="Your Name" 
+                  style={{ borderRadius: '10px', paddingLeft: '40px' }} 
+                />
+                <i 
+                  className="fas fa-user" 
+                  style={{ 
+                    position: 'absolute', 
+                    left: '15px', 
+                    top: '42px', 
+                    color: '#999', 
+                    zIndex: 1 
+                  }}
+                ></i>
+              </div>
+            </div>
+            <div className="col-md-6 mb-3">
+              <div className="form-group" style={{ position: 'relative' }}>
+                <label htmlFor="email" style={{ fontWeight: 'bold' }}>Email</label>
+                <input 
+                  type="email" 
+                  className="form-control" 
+                  id="email" 
+                  placeholder="your@email.com" 
+                  style={{ borderRadius: '10px', paddingLeft: '40px' }} 
+                />
+                <i 
+                  className="fas fa-envelope" 
+                  style={{ 
+                    position: 'absolute', 
+                    left: '15px', 
+                    top: '42px', 
+                    color: '#999', 
+                    zIndex: 1 
+                  }}
+                ></i>
+              </div>
+            </div>
+            <div className="col-md-6 mb-3">
+              <div className="form-group" style={{ position: 'relative' }}>
+                <label htmlFor="phone" style={{ fontWeight: 'bold' }}>Phone</label>
+                <input 
+                  type="tel" 
+                  className="form-control" 
+                  id="phone" 
+                  placeholder="(123) 456-7890" 
+                  style={{ borderRadius: '10px', paddingLeft: '40px' }} 
+                />
+                <i 
+                  className="fas fa-phone" 
+                  style={{ 
+                    position: 'absolute', 
+                    left: '15px', 
+                    top: '42px', 
+                    color: '#999', 
+                    zIndex: 1 
+                  }}
+                ></i>
+              </div>
+            </div>
+            <div className="col-md-6 mb-3">
+              <div className="form-group" style={{ position: 'relative' }}>
+                <label htmlFor="eventDate" style={{ fontWeight: 'bold' }}>Event Date</label>
+                <input 
+                  type="date" 
+                  className="form-control" 
+                  id="eventDate" 
+                  style={{ borderRadius: '10px', paddingLeft: '40px' }} 
+                />
+                <i 
+                  className="fas fa-calendar" 
+                  style={{ 
+                    position: 'absolute', 
+                    left: '15px', 
+                    top: '42px', 
+                    color: '#999', 
+                    zIndex: 1 
+                  }}
+                ></i>
+              </div>
+            </div>
+            <div className="col-md-6 mb-3">
+              <div className="form-group" style={{ position: 'relative' }}>
+                <label htmlFor="guests" style={{ fontWeight: 'bold' }}>Estimated Guests</label>
+                <input 
+                  type="number" 
+                  className="form-control" 
+                  id="guests" 
+                  placeholder="50" 
+                  style={{ borderRadius: '10px', paddingLeft: '40px' }} 
+                />
+                <i 
+                  className="fas fa-users" 
+                  style={{ 
+                    position: 'absolute', 
+                    left: '15px', 
+                    top: '42px', 
+                    color: '##999', 
+                    zIndex: 1 
+                  }}
+                ></i>
+              </div>
+            </div>
+            <div className="col-md-6 mb-3">
+              <div className="form-group" style={{ position: 'relative' }}>
+                <label htmlFor="eventType" style={{ fontWeight: 'bold' }}>Event Type</label>
+                <select 
+                  className="form-control" 
+                  id="eventType" 
+                  style={{ borderRadius: '10px', paddingLeft: '40px', height: '46px' }}
+                >
+                  <option value="">Select Event Type</option>
+                  <option value="corporate">Corporate Event</option>
+                  <option value="wedding">Wedding</option>
+                  <option value="birthday">Birthday Party</option>
+                  <option value="private">Private Party</option>
+                  <option value="other">Other</option>
+                </select>
+                <i 
+                  className="fas fa-glass-cheers" 
+                  style={{ 
+                    position: 'absolute', 
+                    left: '15px', 
+                    top: '42px', 
+                    color: '#999', 
+                    zIndex: 1 
+                  }}
+                ></i>
+              </div>
+            </div>
+            <div className="col-12 mb-3">
+              <div className="form-group" style={{ position: 'relative' }}>
+                <label htmlFor="message" style={{ fontWeight: 'bold' }}>Special Requests</label>
+                <textarea 
+                  className="form-control" 
+                  id="message" 
+                  rows="4" 
+                  placeholder="Any dietary restrictions, special requests, or additional details..." 
+                  style={{ borderRadius: '10px', paddingLeft: '40px', paddingTop: '12px' }}
+                ></textarea>
+                <i 
+                  className="fas fa-comment" 
+                  style={{ 
+                    position: 'absolute', 
+                    left: '15px', 
+                    top: '42px', 
+                    color: '#999', 
+                    zIndex: 1 
+                  }}
+                ></i>
+              </div>
+            </div>
+          </div>
+          <div className="modal-footer" style={{ 
+            justifyContent: 'center', 
+            borderTop: 'none',
+            flexShrink: 0,
+            paddingTop: '20px',
+            paddingBottom: '20px'
+          }}>
+            <button 
+              type="submit" 
+              className="btn btn-primary btn-lg" 
+              style={{ 
+                backgroundColor: '#d9534f', 
+                borderColor: '#d9534f', 
+                borderRadius: '25px', 
+                padding: '10px 30px', 
+                marginRight: '10px',
+                fontSize: '16px'
+              }}
+            >
+              Submit Inquiry
+            </button>
+            <button 
+              type="button" 
+              className="btn btn-secondary" 
+              onClick={() => setModalOpen(false)} 
+              style={{ 
+                borderRadius: '25px', 
+                padding: '10px 30px',
+                fontSize: '16px'
+              }}
+            >
+              Close
             </button>
           </div>
-          <div className="modal-body" style={{ padding: '30px' }}>
-            <form>
-              <div className="row">
-                <div className="col-md-6 mb-3">
-                  <div className="form-group" style={{ position: 'relative' }}>
-                    <label htmlFor="name" style={{ fontWeight: 'bold' }}>Name</label>
-                    <input type="text" className="form-control" id="name" placeholder="Your Name" style={{ borderRadius: '10px', paddingLeft: '40px' }} />
-                    <i className="fas fa-user" style={{ position: 'absolute', left: '10px', top: '60%', transform: 'translateY(-50%)', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
-                  </div>
-                </div>
-                <div className="col-md-6 mb-3">
-                  <div className="form-group" style={{ position: 'relative' }}>
-                    <label htmlFor="email" style={{ fontWeight: 'bold' }}>Email</label>
-                    <input type="email" className="form-control" id="email" placeholder="your@email.com" style={{ borderRadius: '10px', paddingLeft: '40px' }} />
-                    <i className="fas fa-envelope" style={{ position: 'absolute', left: '10px', top: '60%', transform: 'translateY(-50%)', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
-                  </div>
-                </div>
-                <div className="col-md-6 mb-3">
-                  <div className="form-group" style={{ position: 'relative' }}>
-                    <label htmlFor="phone" style={{ fontWeight: 'bold' }}>Phone</label>
-                    <input type="tel" className="form-control" id="phone" placeholder="(123) 456-7890" style={{ borderRadius: '10px', paddingLeft: '40px' }} />
-                    <i className="fas fa-phone" style={{ position: 'absolute', left: '10px', top: '60%', transform: 'translateY(-50%)', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
-                  </div>
-                </div>
-                <div className="col-md-6 mb-3">
-                  <div className="form-group" style={{ position: 'relative' }}>
-                    <label htmlFor="eventDate" style={{ fontWeight: 'bold' }}>Event Date</label>
-                    <input type="date" className="form-control" id="eventDate" style={{ borderRadius: '10px', paddingLeft: '40px' }} />
-                    <i className="fas fa-calendar" style={{ position: 'absolute', left: '10px', top: '60%', transform: 'translateY(-50%)', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
-                  </div>
-                </div>
-                <div className="col-md-6 mb-3">
-                  <div className="form-group" style={{ position: 'relative' }}>
-                    <label htmlFor="guests" style={{ fontWeight: 'bold' }}>Estimated Guests</label>
-                    <input type="number" className="form-control" id="guests" placeholder="50" style={{ borderRadius: '10px', paddingLeft: '40px' }} />
-                    <i className="fas fa-users" style={{ position: 'absolute', left: '10px', top: '60%', transform: 'translateY(-50%)', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
-                  </div>
-                </div>
-                <div className="col-md-6 mb-3">
-                  <div className="form-group" style={{ position: 'relative' }}>
-                    <label htmlFor="eventType" style={{ fontWeight: 'bold' }}>Event Type</label>
-                    <select className="form-control" id="eventType" style={{ borderRadius: '10px', paddingLeft: '40px' }}>
-                      <option value="">Select Event Type</option>
-                      <option value="corporate">Corporate Event</option>
-                      <option value="wedding">Wedding</option>
-                      <option value="birthday">Birthday Party</option>
-                      <option value="private">Private Party</option>
-                      <option value="other">Other</option>
-                    </select>
-                    <i className="fas fa-glass-cheers" style={{ position: 'absolute', left: '10px', top: '60%', transform: 'translateY(-50%)', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
-                  </div>
-                </div>
-                <div className="col-12 mb-3">
-                  <div className="form-group" style={{ position: 'relative' }}>
-                    <label htmlFor="message" style={{ fontWeight: 'bold' }}>Special Requests</label>
-                    <textarea className="form-control" id="message" rows="4" placeholder="Any dietary restrictions, special requests, or additional details..." style={{ borderRadius: '10px', paddingLeft: '40px' }}></textarea>
-                    <i className="fas fa-comment" style={{ position: 'absolute', left: '10px', top: '40px', color: '#999', zIndex: 1, marginTop: '10px' }}></i>
-                  </div>
-                </div>
-              </div>
-              <div className="modal-footer" style={{ justifyContent: 'center', borderTop: 'none' }}>
-                <button type="submit" className="btn btn-primary btn-lg" style={{ backgroundColor: '#d9534f', borderColor: '#d9534f', borderRadius: '25px', padding: '10px 30px', marginRight: '10px' }}>Submit Inquiry</button>
-                <button type="button" className="btn btn-secondary" onClick={() => setModalOpen(false)} style={{ borderRadius: '25px', padding: '10px 30px' }}>Close</button>
-              </div>
-            </form>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
+  </div>
+</div>
     {modalOpen && <div className="modal-backdrop fade show" onClick={() => setModalOpen(false)}></div>}
 </>
   );
