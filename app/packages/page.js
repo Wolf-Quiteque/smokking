@@ -130,7 +130,7 @@ export default function Packages() {
             <h2>Kingz Smoke Ringz BBQ Packages</h2>
           </div>
           <div className="row clearfix">
-            <div className="col-lg-4 col-md-6 col-sm-12 service-block">
+            <div className="col-lg-4 col-md-6 col-sm-12 service-block mb-2">
               <div className="service-block-one wow fadeInUp animated animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style={{ visibility: 'visible', animationDuration: '1500ms', animationDelay: '0ms', animationName: 'fadeInUp' }}>
                 <div className="inner-box">
                   <div className="icon-box"><i className="flaticon-meat-4"></i></div>
@@ -142,7 +142,7 @@ export default function Packages() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-6 col-sm-12 service-block">
+            <div className="col-lg-4 col-md-6 col-sm-12 service-block mb-2">
               <div className="service-block-one wow fadeInUp animated animated animated" data-wow-delay="300ms" data-wow-duration="1500ms" style={{ visibility: 'visible', animationDuration: '1500ms', animationDelay: '300ms', animationName: 'fadeInUp' }}>
                 <div className="inner-box">
                   <div className="icon-box"><i className="flaticon-hang"></i></div>
@@ -154,7 +154,7 @@ export default function Packages() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-6 col-sm-12 service-block">
+            <div className="col-lg-4 col-md-6 col-sm-12 service-block mb-2">
               <div className="service-block-one wow fadeInUp animated animated animated" data-wow-delay="600ms" data-wow-duration="1500ms" style={{ visibility: 'visible', animationDuration: '1500ms', animationDelay: '600ms', animationName: 'fadeInUp' }}>
                 <div className="inner-box">
                   <div className="icon-box"><i className="flaticon-meat-5"></i></div>
@@ -166,7 +166,7 @@ export default function Packages() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-6 col-sm-12 service-block">
+            <div className="col-lg-4 col-md-6 col-sm-12 service-block mb-2">
               <div className="service-block-one wow fadeInUp animated animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style={{ visibility: 'visible', animationDuration: '1500ms', animationDelay: '0ms', animationName: 'fadeInUp' }}>
                 <div className="inner-box">
                   <div className="icon-box"><i className="flaticon-hang"></i></div>
@@ -178,7 +178,7 @@ export default function Packages() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-6 col-sm-12 service-block">
+            <div className="col-lg-4 col-md-6 col-sm-12 service-block mb-2">
               <div className="service-block-one wow fadeInUp animated animated animated" data-wow-delay="300ms" data-wow-duration="1500ms" style={{ visibility: 'visible', animationDuration: '1500ms', animationDelay: '300ms', animationName: 'fadeInUp' }}>
                 <div className="inner-box">
                   <div className="icon-box"><i className="flaticon-meat-4"></i></div>
@@ -190,7 +190,7 @@ export default function Packages() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-6 col-sm-12 service-block">
+            <div className="col-lg-4 col-md-6 col-sm-12 service-block mb-2">
               <div className="service-block-one wow fadeInUp animated animated animated" data-wow-delay="600ms" data-wow-duration="1500ms" style={{ visibility: 'visible', animationDuration: '1500ms', animationDelay: '600ms', animationName: 'fadeInUp' }}>
                 <div className="inner-box">
                   <div className="icon-box"><i className="flaticon-meat-5"></i></div>
