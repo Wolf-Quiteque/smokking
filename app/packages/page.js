@@ -43,7 +43,7 @@ export default function Packages() {
                       <li><a href="/menu">Menu</a></li>
                       <li><a href="/catering">Catering</a></li>
                       <li className="current"><a href="/packages">Packages</a></li>
-                      <li><a href="/promotions">Promotions</a></li>
+                      
                       <li><a href="/events">Events</a></li>
                     </ul>
                   </div>
@@ -93,7 +93,7 @@ export default function Packages() {
                       <li><a href="/menu">Menu</a></li>
                       <li><a href="/catering">Catering</a></li>
                       <li className="current"><a href="/packages">Packages</a></li>
-                      <li><a href="/promotions">Promotions</a></li>
+                      
                       <li><a href="/events">Events</a></li>
                     </ul>
                   </div>

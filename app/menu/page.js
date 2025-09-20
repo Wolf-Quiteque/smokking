@@ -316,7 +316,7 @@ export default function Menu() {
                       <li className="current"><a href="/menu">Menu</a></li>
                       <li><a href="/catering">Catering</a></li>
                       <li><a href="/packages">Packages</a></li>
-                      <li><a href="/promotions">Promotions</a></li>
+                      
                       <li><a href="/events">Events</a></li>
                     </ul>
                   </div>
@@ -380,7 +380,7 @@ export default function Menu() {
                       <li className="current"><a href="/menu">Menu</a></li>
                       <li><a href="/catering">Catering</a></li>
                       <li><a href="/packages">Packages</a></li>
-                      <li><a href="/promotions">Promotions</a></li>
+                      
                       <li><a href="/events">Events</a></li>
                     </ul>
                   </div>
