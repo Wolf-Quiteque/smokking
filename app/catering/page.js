@@ -127,12 +127,8 @@ export default function Catering() {
           <div className="inner-container mr-0 clearfix">
             <div className="row clearfix">
               <div className="col-lg-6 col-md-6 col-sm-12 video-column">
-                <div id="video_block_1">
-                  <div className="video-inner" style={{ backgroundImage: 'url(/images/resource/about-1.jpg)' }}>
-                    <a href="https://www.youtube.com/watch?v=nfP5N9Yc72A&t=28s" className="lightbox-image video-btn" data-caption=""><i className="fas fa-play"></i></a>
-                  </div>
+            <img className="img-fluid" src="/images/catering/king.jpeg" />
                 </div>
-              </div>
               <div className="col-lg-6 col-md-6 col-sm-12 content-column">
                 <div id="content_block_1">
                   <div className="content-box">
@@ -171,11 +167,11 @@ export default function Catering() {
             <div className="col-lg-4 col-md-6 col-sm-12 service-block">
               <div className="service-block-one wow fadeInUp animated animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style={{ visibility: 'visible', animationDuration: '1500ms', animationDelay: '0ms', animationName: 'fadeInUp' }}>
                 <div className="inner-box">
-                  <div className="icon-box"><i className="flaticon-meat-4"></i></div>
+                  <div className="icon-box"><i className="flaticon-call-center-agent"></i></div>
                   <h3><a href="#">Corporate Events</a></h3>
-                  <p>Tailored catering for business meetings, conferences, and team building events.</p>
+                  <p>Tailored catering for business meetings, conferences  events.</p>
                   <div className="btn-box">
-                    <a href="#" className="theme-btn">Learn More</a>
+                    
                   </div>
                 </div>
               </div>
@@ -183,11 +179,11 @@ export default function Catering() {
             <div className="col-lg-4 col-md-6 col-sm-12 service-block">
               <div className="service-block-one wow fadeInUp animated animated animated" data-wow-delay="300ms" data-wow-duration="1500ms" style={{ visibility: 'visible', animationDuration: '1500ms', animationDelay: '300ms', animationName: 'fadeInUp' }}>
                 <div className="inner-box">
-                  <div className="icon-box"><i className="flaticon-hang"></i></div>
+                  <div className="icon-box"><i className="flaticon-winner"></i></div>
                   <h3><a href="#">Private Parties</a></h3>
                   <p>Intimate gatherings, birthdays, anniversaries, and family celebrations.</p>
                   <div className="btn-box">
-                    <a href="#" className="theme-btn">Learn More</a>
+                    
                   </div>
                 </div>
               </div>
@@ -195,11 +191,11 @@ export default function Catering() {
             <div className="col-lg-4 col-md-6 col-sm-12 service-block">
               <div className="service-block-one wow fadeInUp animated animated animated" data-wow-delay="600ms" data-wow-duration="1500ms" style={{ visibility: 'visible', animationDuration: '1500ms', animationDelay: '600ms', animationName: 'fadeInUp' }}>
                 <div className="inner-box">
-                  <div className="icon-box"><i className="flaticon-meat-5"></i></div>
+                  <div className="icon-box"><i className="flaticon-flag"></i></div>
                   <h3><a href="#">Special Occasions</a></h3>
                   <p>Weddings, holiday parties, and any event that deserves exceptional BBQ.</p>
                   <div className="btn-box">
-                    <a href="#" className="theme-btn">Learn More</a>
+                    
                   </div>
                 </div>
               </div>
@@ -299,68 +295,70 @@ export default function Catering() {
       {/* shop-style-two end */}
 
       {/* contact-section */}
-      <section className="contact-section centred" id="booking">
+      <section className="contact-section centred" id="booking" style={{ background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)', padding: '80px 0', position: 'relative' }}>
         <div className="auto-container">
-          <div className="sec-title">
-            <span>Book Your Event</span>
-            <h2>Get In Touch</h2>
+          <div className="sec-title" style={{ marginBottom: '50px' }}>
+            <span style={{ color: '#d9534f', fontSize: '18px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '2px' }}>Reserve Your Experience</span>
+            <h2 style={{ color: '#2c3e50', fontSize: '48px', fontWeight: '700', marginTop: '10px', marginBottom: '20px' }}>Book Your Catering Event</h2>
+            <p style={{ color: '#6c757d', fontSize: '18px', maxWidth: '600px', margin: '0 auto' }}>Let us make your special occasion unforgettable with our premium barbecue catering services</p>
           </div>
-          <div className="form-inner">
-            <form method="post" action="#" id="contact-form" className="default-form">
-              <div className="row clearfix">
-                <div className="col-lg-6 col-md-6 col-sm-12">
+          <div className="form-inner" style={{ background: 'white', borderRadius: '20px', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', padding: '50px', maxWidth: '900px', margin: '0 auto' }}>
+            <form>
+              <div className="row">
+                <div className="col-md-6 mb-4">
                   <div className="form-group">
-                    <i className="far fa-user"></i>
-                    <input type="text" name="username" placeholder="Name" required="" />
+                    <label htmlFor="name" style={{ fontWeight: '600', color: '#2c3e50', marginBottom: '8px', display: 'block', textAlign: 'left' }}>Full Name</label>
+                    <input type="text" className="form-control" id="name" placeholder="Enter your full name" style={{ borderRadius: '12px', padding: '15px', border: '2px solid #e9ecef', fontSize: '16px', transition: 'all 0.3s ease' }} />
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-12">
+                <div className="col-md-6 mb-4">
                   <div className="form-group">
-                    <i className="far fa-envelope"></i>
-                    <input type="email" name="email" placeholder="Email" required="" />
+                    <label htmlFor="email" style={{ fontWeight: '600', color: '#2c3e50', marginBottom: '8px', display: 'block', textAlign: 'left' }}>Email Address</label>
+                    <input type="email" className="form-control" id="email" placeholder="your@email.com" style={{ borderRadius: '12px', padding: '15px', border: '2px solid #e9ecef', fontSize: '16px', transition: 'all 0.3s ease' }} />
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-12">
+                <div className="col-md-6 mb-4">
                   <div className="form-group">
-                    <i className="fas fa-phone-volume"></i>
-                    <input type="text" name="phone" required="" placeholder="Phone" />
+                    <label htmlFor="phone" style={{ fontWeight: '600', color: '#2c3e50', marginBottom: '8px', display: 'block', textAlign: 'left' }}>Phone Number</label>
+                    <input type="tel" className="form-control" id="phone" placeholder="(123) 456-7890" style={{ borderRadius: '12px', padding: '15px', border: '2px solid #e9ecef', fontSize: '16px', transition: 'all 0.3s ease' }} />
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-12">
+                <div className="col-md-6 mb-4">
                   <div className="form-group">
-                    <i className="far fa-calendar"></i>
-                    <input type="date" name="event_date" required="" placeholder="Event Date" />
+                    <label htmlFor="eventDate" style={{ fontWeight: '600', color: '#2c3e50', marginBottom: '8px', display: 'block', textAlign: 'left' }}>Event Date</label>
+                    <input type="date" className="form-control" id="eventDate" style={{ borderRadius: '12px', padding: '15px', border: '2px solid #e9ecef', fontSize: '16px', transition: 'all 0.3s ease' }} />
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-12">
+                <div className="col-md-6 mb-4">
                   <div className="form-group">
-                    <i className="far fa-users"></i>
-                    <input type="number" name="guests" required="" placeholder="Estimated Guest Count" />
+                    <label htmlFor="guests" style={{ fontWeight: '600', color: '#2c3e50', marginBottom: '8px', display: 'block', textAlign: 'left' }}>Estimated Guests</label>
+                    <input type="number" className="form-control" id="guests" placeholder="50" style={{ borderRadius: '12px', padding: '15px', border: '2px solid #e9ecef', fontSize: '16px', transition: 'all 0.3s ease' }} />
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-12">
+                <div className="col-md-6 mb-4">
                   <div className="form-group">
-                    <i className="far fa-building"></i>
-                    <select name="event_type" required="">
-                      <option value="">Event Type</option>
+                    <label htmlFor="eventType" style={{ fontWeight: '600', color: '#2c3e50', marginBottom: '8px', display: 'block', textAlign: 'left' }}>Event Type</label>
+                    <select className="form-control" id="eventType" style={{ borderRadius: '12px', padding: '15px', border: '2px solid #e9ecef', fontSize: '16px', transition: 'all 0.3s ease' }}>
+                      <option value="">Select Event Type</option>
                       <option value="corporate">Corporate Event</option>
                       <option value="wedding">Wedding</option>
                       <option value="birthday">Birthday Party</option>
+                      <option value="private">Private Party</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
                 </div>
-                <div className="col-lg-12 col-md-12 col-sm-12">
+                <div className="col-12 mb-4">
                   <div className="form-group">
-                    <i className="far fa-comment-alt"></i>
-                    <textarea name="message" placeholder="Special Requests or Message"></textarea>
+                    <label htmlFor="message" style={{ fontWeight: '600', color: '#2c3e50', marginBottom: '8px', display: 'block', textAlign: 'left' }}>Special Requests</label>
+                    <textarea className="form-control" id="message" rows="4" placeholder="Any dietary restrictions, special requests, or additional details..." style={{ borderRadius: '12px', padding: '15px', border: '2px solid #e9ecef', fontSize: '16px', transition: 'all 0.3s ease', resize: 'vertical' }}></textarea>
                   </div>
                 </div>
-                <div className="col-lg-12 col-md-12 col-sm-12 form-group message-btn centred">
-                  <button className="theme-btn" type="submit" name="submit-form">
-                    SEND INQUIRY
-                  </button>
-                </div>
+              </div>
+              <div className="text-center" style={{ marginTop: '30px' }}>
+                <button type="submit" className="btn btn-primary btn-lg" style={{ background: 'linear-gradient(135deg, #d9534f 0%, #c9302c 100%)', border: 'none', borderRadius: '30px', padding: '15px 40px', fontSize: '18px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px', boxShadow: '0 8px 25px rgba(217, 83, 79, 0.3)', transition: 'all 0.3s ease', cursor: 'pointer' }}>
+                  <i className="fas fa-paper-plane" style={{ marginRight: '10px' }}></i>Submit Booking Request
+                </button>
               </div>
             </form>
           </div>
@@ -368,41 +366,7 @@ export default function Catering() {
       </section>
       {/* contact-section end */}
 
-      {/* testimonial-section */}
-      <section className="testimonial-section alternate-2 bg-color-1">
-        <div className="icon-layer" style={{ backgroundImage: 'url(/images/icons/bg-icon-1.png)' }}></div>
-        <div className="auto-container">
-          <div className="sec-title style-two">
-            <span>Testimonials</span>
-            <h2>Why People Believe in Us!</h2>
-          </div>
-          <div className="two-column-carousel owl-carousel owl-theme owl-dots-none">
-            <div className="testimonial-block-one">
-              <div className="inner-box">
-                <div className="icon-box"><i className="flaticon-quote"></i></div>
-                <p>"Chef Glenn's barbecue was a hit at our corporate event. The presentation was exquisite, and the unique flavors were truly the highlight of the evening."</p>
-                <div className="author-box">
-                  <figure className="image-box"><img src="/images/resource/testimonial-1.png" alt="" /></figure>
-                  <h5>Corporate Client</h5>
-                  <span className="designation">Event Organizer</span>
-                </div>
-              </div>
-            </div>
-            <div className="testimonial-block-one">
-              <div className="inner-box">
-                <div className="icon-box"><i className="flaticon-quote"></i></div>
-                <p>"Presentation was on point... portions were bigger than I expected and to bring a unique flavor to a classic dish like potato salad and knock it out the park?"</p>
-                <div className="author-box">
-                  <figure className="image-box"><img src="/images/resource/testimonial-2.png" alt="" /></figure>
-                  <h5>Tanya C.</h5>
-                  <span className="designation">Food Lover</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* testimonial-section end */}
+
     </>
   );
 }
