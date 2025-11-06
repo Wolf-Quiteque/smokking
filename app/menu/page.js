@@ -21,7 +21,7 @@ export default function Menu() {
       { id: 5, name: 'Pork Roast', price: 25.00, unit: '/ lb', image: '/images/resource/shop/shop-5.jpg', category: 'meats' },
       { id: 6, name: 'Pork Spare Ribs', price: 36.00, image: '/images/resource/shop/shop-10.jpg', category: 'meats' },
       { id: 7, name: 'Slab St. Louis Style Ribs', price: 36.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/resource/shop/shop-10.jpg', category: 'meats' },
-      { id: 8, name: 'Slab Baby Back Ribs', price: 36.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/resource/shop/shop-11.jpg', category: 'meats' },
+      { id: 8, name: 'Slab Baby Back Ribs', price: 42.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/resource/shop/shop-11.jpg', category: 'meats' },
       { id: 9, name: '1lb. Chicken', price: 20.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/resource/shop/shop-12.jpg', category: 'meats' },
       { id: 10, name: '1lb. Hot links', price: 20.00, image: '/images/resource/shop/shop-13.jpg', category: 'meats' },
       { id: 11, name: '1lb. Boudin Links', price: 20.00, image: '/images/resource/shop/shop-1.jpg', category: 'meats' },
