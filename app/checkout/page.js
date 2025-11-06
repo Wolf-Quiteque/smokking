@@ -17,8 +17,11 @@ export default function Checkout() {
     zipCode: '',
     cardNumber: '',
     expiryDate: '',
-    cvv: ''
+    cvv: '',
+    pickupDate: '',
+    pickupTime: ''
   });
+  const [advanceNoticeError, setAdvanceNoticeError] = useState(null);
 
   // Load cart from localStorage
   useEffect(() => {
@@ -58,6 +61,33 @@ export default function Checkout() {
     }));
   };
 
+  // Check if order meets advance notice requirements
+  const checkAdvanceNotice = () => {
+    if (!formData.pickupDate || !formData.pickupTime) {
+      return 'Please select a pickup date and time';
+    }
+
+    const pickupDateTime = new Date(`${formData.pickupDate}T${formData.pickupTime}`);
+    const now = new Date();
+    const hoursUntilPickup = (pickupDateTime - now) / (1000 * 60 * 60);
+
+    // Check each item in cart for advance notice requirements
+    for (const item of cart) {
+      if (item.prepTime && item.prepTime > 0) {
+        if (hoursUntilPickup < item.prepTime) {
+          return `${item.name} requires ${item.prepTime} hours advance notice. Please select a later pickup time or remove this item from your cart.`;
+        }
+      }
+    }
+
+    // Check if pickup time is in the past
+    if (pickupDateTime < now) {
+      return 'Pickup time cannot be in the past';
+    }
+
+    return null;
+  };
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,12 +103,23 @@ export default function Checkout() {
       return;
     }
 
+    // Check advance notice requirements
+    const advanceNoticeCheck = checkAdvanceNotice();
+    if (advanceNoticeCheck) {
+      setAdvanceNoticeError(advanceNoticeCheck);
+      alert(advanceNoticeCheck);
+      return;
+    }
+
+    setAdvanceNoticeError(null);
+
     // Here you would integrate with your payment processor (e.g., Stripe)
     // For now, we'll just simulate a successful order
     console.log('Order submitted:', {
       customer: formData,
       cart: cart,
-      total: getTotal()
+      total: getTotal(),
+      pickupTime: `${formData.pickupDate} at ${formData.pickupTime}`
     });
 
     // Clear the cart
@@ -226,6 +267,68 @@ export default function Checkout() {
                           name="zipCode"
                           value={formData.zipCode}
                           onChange={handleInputChange}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 style={{ marginTop: '30px' }}>Pickup Information *</h3>
+                  {cart.some(item => item.prepTime > 0) && (
+                    <div style={{
+                      background: '#fff3cd',
+                      border: '1px solid #ffc107',
+                      color: '#856404',
+                      padding: '12px 15px',
+                      borderRadius: '8px',
+                      marginBottom: '15px',
+                      fontSize: '13px'
+                    }}>
+                      <strong><i className="fas fa-exclamation-triangle" style={{marginRight: '8px'}}></i>Advance Notice Required:</strong>
+                      <ul style={{marginBottom: 0, marginTop: '8px', paddingLeft: '20px'}}>
+                        {cart.filter(item => item.prepTime > 0).map(item => (
+                          <li key={item.id}>{item.name} - {item.prepTime} hours notice</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {advanceNoticeError && (
+                    <div style={{
+                      background: '#f8d7da',
+                      border: '1px solid #f5c6cb',
+                      color: '#721c24',
+                      padding: '12px 15px',
+                      borderRadius: '8px',
+                      marginBottom: '15px',
+                      fontSize: '13px'
+                    }}>
+                      <strong><i className="fas fa-times-circle" style={{marginRight: '8px'}}></i>{advanceNoticeError}</strong>
+                    </div>
+                  )}
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label>Pickup Date *</label>
+                        <input
+                          type="date"
+                          className="form-control"
+                          name="pickupDate"
+                          value={formData.pickupDate}
+                          onChange={handleInputChange}
+                          min={new Date().toISOString().split('T')[0]}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label>Pickup Time *</label>
+                        <input
+                          type="time"
+                          className="form-control"
+                          name="pickupTime"
+                          value={formData.pickupTime}
+                          onChange={handleInputChange}
+                          required
                         />
                       </div>
                     </div>
