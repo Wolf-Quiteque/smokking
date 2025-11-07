@@ -210,6 +210,7 @@ export default function Menu() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 style={{ objectFit: 'cover' }}
                 loading="lazy"
+                unoptimized={true}
               />
               {item.prepTime > 0 && (
                 <div style={{
@@ -620,6 +621,10 @@ export default function Menu() {
                         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                         .join(' ');
 
+                      // Show only 5 items initially
+                      const initialItems = categoryItems.slice(0, 5);
+                      const hasMoreItems = categoryItems.length > 5;
+
                       return (
                         <div key={category} id={category} className="menu-category" style={{ marginBottom: '50px' }}>
                           <h2 className="category-title" style={{
@@ -632,8 +637,31 @@ export default function Menu() {
                             {categoryTitle}
                           </h2>
                           <div className="row clearfix">
-                            {renderMenuItems(categoryItems)}
+                            {renderMenuItems(initialItems)}
                           </div>
+                          {hasMoreItems && (
+                            <div className="text-center" style={{ marginTop: '30px' }}>
+                              <button
+                                onClick={() => setActiveCategory(category)}
+                                className="theme-btn"
+                                style={{
+                                  background: '#ff6b35',
+                                  color: 'white',
+                                  border: 'none',
+                                  padding: '12px 30px',
+                                  borderRadius: '5px',
+                                  fontSize: '16px',
+                                  fontWeight: 'bold',
+                                  cursor: 'pointer',
+                                  transition: 'all 0.3s ease'
+                                }}
+                                onMouseOver={(e) => e.target.style.background = '#e55a2b'}
+                                onMouseOut={(e) => e.target.style.background = '#ff6b35'}
+                              >
+                                See More {categoryTitle} Items ({categoryItems.length - 5} more)
+                              </button>
+                            </div>
+                          )}
                         </div>
                       );
                     })}
