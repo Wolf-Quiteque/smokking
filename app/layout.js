@@ -3,20 +3,36 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
-import "./globals.css";
+import { CartProvider, useCart } from '../lib/CartContext';
+import CheckoutModal from '../lib/CheckoutModal';
+import Preloader from '../components/Preloader';
+import { useState } from 'react';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+function LayoutContent({ children, pathname }) {
+  const { cart, isCartOpen, getTotalItems, getTotalPrice, updateQuantity, removeFromCart, closeCart, toggleCart } = useCart();
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
 
-export default function RootLayout({ children }) {
-  const pathname = usePathname();
+  const handleCheckoutClick = (e) => {
+    e.preventDefault();
+    if (cart.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+    closeCart(); // Close the cart sidebar
+    setIsCheckoutModalOpen(true); // Open the checkout modal
+  };
+
+  const handlePaymentSuccess = (paymentIntent) => {
+    // Clear the cart
+    cart.forEach(item => removeFromCart(item.id));
+
+    // Show success message
+    alert(`Payment successful! Order ID: ${paymentIntent.id}\n\nThank you for your order! We'll send you a confirmation email shortly.`);
+
+    // Close modal
+    setIsCheckoutModalOpen(false);
+  };
 
   return (
     <html lang="en">
@@ -36,17 +52,24 @@ export default function RootLayout({ children }) {
         <link href="/css/style.css" rel="stylesheet" />
         <link href="/css/responsive.css" rel="stylesheet" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body >
+            {/* Preloader */}
+            <Preloader />
+
             <div className="boxed_wrapper ltr">
 
-       
+
     {/* sidebar cart item */}
-    <div className="xs-sidebar-group info-group info-sidebar"style={{ backgroundImage: 'url(/images/background/page-title.webp)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
-        <div className="xs-overlay xs-bg-black" onClick={() => document.getElementById('cart-sidebar').style.display = 'none'}></div>
-        <div className="xs-sidebar-widget">
+    <div id="cart-sidebar" className={`xs-sidebar-group info-group info-sidebar ${isCartOpen ? 'active' : ''}`} style={{ backgroundImage: 'url(/images/background/page-title.webp)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
+        <div className="xs-overlay xs-bg-black" onClick={closeCart}></div>
+        <div className="xs-sidebar-widget" style={{
+          maxHeight: '100vh',
+          overflowY: 'auto',
+          overflowX: 'hidden'
+        }}>
             <div className="sidebar-widget-container">
                 <div className="widget-heading">
-                    <a href="#" className="close-side-widget" onClick={(e) => { e.preventDefault(); document.getElementById('cart-sidebar').style.display = 'none'; }}>X</a>
+                    <a href="#" className="close-side-widget" onClick={(e) => { e.preventDefault(); closeCart(); }}>X</a>
                 </div>
                 <div className="sidebar-textwidget">
                     <div className="sidebar-info-contents">
@@ -56,14 +79,105 @@ export default function RootLayout({ children }) {
                             </div>
                             <div className="cart-content" style={{background: 'rgba(0,0,0,0.8)', padding: '20px', borderRadius: '10px', marginTop: '20px'}}>
                                 <h4 style={{color: '#fff', marginBottom: '20px'}}>Your Cart</h4>
-                                <div id="cart-items" className="cart-items" style={{maxHeight: '300px', overflowY: 'auto', marginBottom: '20px'}}>
-                                    {/* Cart items will be populated here */}
+                                <div id="cart-items" className="cart-items" style={{
+                                  maxHeight: '400px',
+                                  overflowY: 'auto',
+                                  marginBottom: '20px',
+                                  paddingRight: '10px'
+                                }}>
+                                    {cart.length === 0 ? (
+                                      <p style={{color: '#fff', textAlign: 'center'}}>Your cart is empty</p>
+                                    ) : (
+                                      cart.map(item => (
+                                        <div key={item.id} className="cart-item" style={{
+                                          display: 'flex',
+                                          flexDirection: 'column',
+                                          gap: '10px',
+                                          padding: '15px 0',
+                                          borderBottom: '1px solid rgba(255,255,255,0.2)',
+                                          color: '#fff'
+                                        }}>
+                                          <div style={{display: 'flex', alignItems: 'flex-start', gap: '10px'}}>
+                                            <img src={item.image} alt={item.name} style={{
+                                              width: '60px',
+                                              height: '60px',
+                                              objectFit: 'cover',
+                                              borderRadius: '5px',
+                                              flexShrink: 0
+                                            }} />
+                                            <div style={{flex: 1, minWidth: 0}}>
+                                              <h6 style={{margin: '0 0 5px 0', fontSize: '14px', color: '#fff', wordBreak: 'break-word'}}>{item.name}</h6>
+                                              <p style={{margin: '0', fontSize: '13px', color: '#ff6b35'}}>${item.price.toFixed(2)} each</p>
+                                            </div>
+                                          </div>
+                                          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', flexWrap: 'wrap'}}>
+                                            <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                                              <button
+                                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                                style={{
+                                                  background: '#d9534f',
+                                                  color: 'white',
+                                                  border: 'none',
+                                                  padding: '6px 12px',
+                                                  borderRadius: '4px',
+                                                  cursor: 'pointer',
+                                                  fontSize: '14px',
+                                                  fontWeight: 'bold'
+                                                }}
+                                              >-</button>
+                                              <span style={{minWidth: '30px', textAlign: 'center', color: '#fff', fontWeight: 'bold'}}>{item.quantity}</span>
+                                              <button
+                                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                                style={{
+                                                  background: '#5cb85c',
+                                                  color: 'white',
+                                                  border: 'none',
+                                                  padding: '6px 12px',
+                                                  borderRadius: '4px',
+                                                  cursor: 'pointer',
+                                                  fontSize: '14px',
+                                                  fontWeight: 'bold'
+                                                }}
+                                              >+</button>
+                                            </div>
+                                            <button
+                                              onClick={() => removeFromCart(item.id)}
+                                              style={{
+                                                background: '#f0ad4e',
+                                                color: 'white',
+                                                border: 'none',
+                                                padding: '6px 12px',
+                                                borderRadius: '4px',
+                                                cursor: 'pointer',
+                                                fontSize: '12px'
+                                              }}
+                                            >Remove</button>
+                                          </div>
+                                        </div>
+                                      ))
+                                    )}
                                 </div>
-                                <div className="cart-total" style={{borderTop: '1px solid #fff', paddingTop: '15px', marginBottom: '20px'}}>
-                                    <h5 style={{color: '#fff'}}>Total: <span id="cart-total" style={{color: '#ff6b35'}}>$0.00</span></h5>
+                                <div className="cart-total" style={{borderTop: '1px solid rgba(255,255,255,0.3)', paddingTop: '15px', marginBottom: '20px'}}>
+                                    <h5 style={{color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: 0}}>
+                                      <span>Total:</span>
+                                      <span id="cart-total" style={{color: '#ff6b35', fontSize: '24px', fontWeight: 'bold'}}>${getTotalPrice().toFixed(2)}</span>
+                                    </h5>
                                 </div>
                                 <div className="cart-buttons">
-                                    <a href="/checkout" className="theme-btn" style={{width: '100%', textAlign: 'center', display: 'block'}}>Checkout<i className="fas fa-long-arrow-alt-right"></i></a>
+                                    <button
+                                      onClick={handleCheckoutClick}
+                                      className="theme-btn"
+                                      style={{
+                                        width: '100%',
+                                        textAlign: 'center',
+                                        display: 'block',
+                                        padding: '12px',
+                                        border: 'none',
+                                        cursor: 'pointer'
+                                      }}
+                                    >
+                                      Checkout<i className="fas fa-long-arrow-alt-right"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -109,11 +223,12 @@ export default function RootLayout({ children }) {
                                     </ul>
                                 </div>
                             </li>
-                      
+
                             <li className="cart-box">
-                                <div className="nav-btn nav-toggler navSidebar-button clearfix">
-                                      <a href="#"><i className="flaticon-shopping-cart-1"></i><span>0</span></a>
-                                </div>
+                                <a href="#" onClick={(e) => { e.preventDefault(); toggleCart(); }}>
+                                  <i className="flaticon-shopping-cart-1"></i>
+                                  <span>{getTotalItems()}</span>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -135,7 +250,7 @@ export default function RootLayout({ children }) {
                                         <li className="current"><a href="/">Home</a></li>
                                         <li><a href="/menu">Menu</a></li>
                                         <li><a href="/catering">Catering</a></li>
-                                        <li><a href="/packages">Packages</a></li>
+                                        
                                         
                                         <li><a href="/events">Events</a></li>
                                     </ul>
@@ -190,6 +305,15 @@ export default function RootLayout({ children }) {
     )}
 
   {children}
+
+        {/* Checkout Modal */}
+        <CheckoutModal
+          isOpen={isCheckoutModalOpen}
+          onClose={() => setIsCheckoutModalOpen(false)}
+          cart={cart}
+          totalAmount={getTotalPrice()}
+          onPaymentSuccess={handlePaymentSuccess}
+        />
 
         {/* main-footer */}
         <footer className="main-footer">
@@ -275,5 +399,17 @@ export default function RootLayout({ children }) {
         <Script src="/js/script.js" />
       </body>
     </html>
+  );
+}
+
+export default function RootLayout({ children }) {
+  const pathname = usePathname();
+
+  return (
+    <CartProvider>
+      <LayoutContent pathname={pathname}>
+        {children}
+      </LayoutContent>
+    </CartProvider>
   );
 }

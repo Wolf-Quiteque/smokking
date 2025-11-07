@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useCart } from '../../lib/CartContext';
 
 export default function Menu() {
-  const [cart, setCart] = useState([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { addToCart, getTotalItems, toggleCart } = useCart();
   const [priceRange, setPriceRange] = useState([0, 50]);
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
@@ -107,141 +107,6 @@ export default function Menu() {
     return true;
   });
 
-  // Load cart from localStorage on component mount
-  useEffect(() => {
-    const savedCart = localStorage.getItem('kingzCart');
-    if (savedCart) {
-      try {
-        setCart(JSON.parse(savedCart));
-      } catch (error) {
-        console.error('Error loading cart from localStorage:', error);
-      }
-    }
-  }, []);
-
-  // Save cart to localStorage whenever cart changes
-  useEffect(() => {
-    localStorage.setItem('kingzCart', JSON.stringify(cart));
-  }, [cart]);
-
-  // Add item to cart with animation
-  const addToCart = (item) => {
-    setCart(prevCart => {
-      const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
-      if (existingItem) {
-        return prevCart.map(cartItem =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        );
-      } else {
-        return [...prevCart, { ...item, quantity: 1 }];
-      }
-    });
-
-    // Add animation effect
-    const cartIcon = document.querySelector('.cart-box i');
-    if (cartIcon) {
-      cartIcon.style.transform = 'scale(1.3)';
-      cartIcon.style.color = '#ff6b35';
-      setTimeout(() => {
-        cartIcon.style.transform = 'scale(1)';
-        cartIcon.style.color = '';
-      }, 300);
-    }
-
-    // Show success message
-    showNotification(`${item.name} added to cart!`);
-  };
-
-  // Update item quantity
-  const updateQuantity = (id, newQuantity) => {
-    if (newQuantity <= 0) {
-      removeFromCart(id);
-      return;
-    }
-    setCart(prevCart =>
-      prevCart.map(item =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
-
-  // Remove item from cart
-  const removeFromCart = (id) => {
-    setCart(prevCart => prevCart.filter(item => item.id !== id));
-  };
-
-  // Calculate total price
-  const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-  };
-
-  // Get total items count
-  const getTotalItems = () => {
-    return cart.reduce((total, item) => total + item.quantity, 0);
-  };
-
-  // Toggle cart sidebar
-  const toggleCart = () => {
-    setIsCartOpen(!isCartOpen);
-  };
-
-  // Close cart when clicking overlay
-  const closeCart = () => {
-    setIsCartOpen(false);
-  };
-
-  // Show notification when item is added to cart
-  const showNotification = (message) => {
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = 'cart-notification';
-    notification.innerHTML = `
-      <div style="
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #ff6b35;
-        color: white;
-        padding: 15px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        z-index: 10000;
-        font-weight: bold;
-        animation: slideInRight 0.5s ease-out;
-      ">
-        <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
-        ${message}
-      </div>
-    `;
-
-    // Add animation styles
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes slideInRight {
-        from {
-          transform: translateX(100%);
-          opacity: 0;
-        }
-        to {
-          transform: translateX(0);
-          opacity: 1;
-        }
-      }
-    `;
-    document.head.appendChild(style);
-
-    document.body.appendChild(notification);
-
-    // Remove notification after 3 seconds
-    setTimeout(() => {
-      notification.style.animation = 'slideInRight 0.5s ease-in reverse';
-      setTimeout(() => {
-        document.body.removeChild(notification);
-      }, 500);
-    }, 3000);
-  };
 
   // Handle price range change
   const handlePriceRangeChange = (e, index) => {
@@ -377,49 +242,21 @@ export default function Menu() {
                       <li><a href="/">Home</a></li>
                       <li className="current"><a href="/menu">Menu</a></li>
                       <li><a href="/catering">Catering</a></li>
-                      <li><a href="/packages">Packages</a></li>
+                      
                       
                       <li><a href="/events">Events</a></li>
                     </ul>
                   </div>
                 </nav>
                 <ul className="menu-right-content pull-left clearfix">
-                  <li className="user-box"><a href="#"><i className="flaticon-user-symbol-of-thin-outline"></i></a></li>
-                  <li className="search-box-outer">
-                    <div className="dropdown">
-                      <button className="search-box-btn" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span className="flaticon-search"></span></button>
-                      <ul className="dropdown-menu pull-right search-panel" aria-labelledby="dropdownMenu3">
-                        <li className="panel-outer">
-                          <div className="form-container">
-                            <form method="post" action="#">
-                              <div className="form-group">
-                                <input 
-                                  type="search" 
-                                  name="field-name" 
-                                  value={searchTerm}
-                                  onChange={(e) => setSearchTerm(e.target.value)}
-                                  placeholder="Search...." 
-                                  required="" 
-                                />
-                                <button type="submit" className="search-btn"><span className="fas fa-search"></span></button>
-                              </div>
-                            </form>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
+                
                   <li className="cart-box">
-                    <a href="#" onClick={(e) => { e.preventDefault(); toggleCart(); }}>
+                    <a href="#" className='nav-toggler navSidebar-button' >
                       <i className="flaticon-shopping-cart-1"></i>
                       <span>{getTotalItems()}</span>
                     </a>
                   </li>
-                  <li className="nav-box">
-                    <div className="nav-toggler navSidebar-button clearfix">
-                      <i className="flaticon-list"></i>
-                    </div>
-                  </li>
+               
                 </ul>
               </div>
             </div>
@@ -441,7 +278,7 @@ export default function Menu() {
                       <li><a href="/">Home</a></li>
                       <li className="current"><a href="/menu">Menu</a></li>
                       <li><a href="/catering">Catering</a></li>
-                      <li><a href="/packages">Packages</a></li>
+                      
                       
                       <li><a href="/events">Events</a></li>
                     </ul>
@@ -687,67 +524,6 @@ export default function Menu() {
         </div>
       </section>
       {/* shop-page-section end */}
-
-      {/* Cart Sidebar */}
-      <div id="cart-sidebar" className={`xs-sidebar-group info-group info-sidebar ${isCartOpen ? 'active' : ''}`}>
-        <div className="xs-overlay xs-bg-black" onClick={closeCart}></div>
-        <div className="xs-sidebar-widget">
-          <div className="sidebar-widget-container" style={{backgroundImage: 'url(/images/background/page-title.webp)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
-            <div className="widget-heading">
-              <a href="#" className="close-side-widget" onClick={(e) => { e.preventDefault(); closeCart(); }}>×</a>
-            </div>
-            <div className="sidebar-textwidget">
-              <div className="content-inner">
-                <div className="logo">
-                  <a href="/"><img src="/images/logo_new.webp" alt="Kingz Smoke Ringz BBQ" /></a>
-                </div>
-                <div className="content-box">
-                  <h4>Your Cart</h4>
-                  <div id="cart-items" style={{marginTop: '20px', marginBottom: '20px', maxHeight: '400px', overflowY: 'auto'}}>
-                    {cart.length === 0 ? (
-                      <p>Your cart is empty</p>
-                    ) : (
-                      cart.map(item => (
-                        <div key={item.id} className="cart-item" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #eee'}}>
-                          <div style={{display: 'flex', alignItems: 'center'}}>
-                            <img src={item.image} alt={item.name} style={{width: '50px', height: '50px', objectFit: 'cover', marginRight: '10px'}} />
-                            <div>
-                              <h6 style={{margin: '0', fontSize: '14px'}}>{item.name}</h6>
-                              <p style={{margin: '0', fontSize: '12px'}}>${item.price.toFixed(2)} each</p>
-                            </div>
-                          </div>
-                          <div style={{display: 'flex', alignItems: 'center'}}>
-                            <button onClick={() => updateQuantity(item.id, item.quantity - 1)} style={{background: '#d9534f', color: 'white', border: 'none', padding: '5px 10px', cursor: 'pointer', marginRight: '5px'}}>-</button>
-                            <span style={{margin: '0 10px'}}>{item.quantity}</span>
-                            <button onClick={() => updateQuantity(item.id, item.quantity + 1)} style={{background: '#5cb85c', color: 'white', border: 'none', padding: '5px 10px', cursor: 'pointer', marginRight: '10px'}}>+</button>
-                            <button onClick={() => removeFromCart(item.id)} style={{background: '#f0ad4e', color: 'white', border: 'none', padding: '5px 10px', cursor: 'pointer'}}>Remove</button>
-                          </div>
-                        </div>
-                      ))
-                    )}
-                  </div>
-                  <div style={{borderTop: '1px solid #ddd', paddingTop: '15px', marginTop: '20px'}}>
-                    <h5>Total: <span id="cart-total">${getTotalPrice().toFixed(2)}</span></h5>
-                    <a href="/checkout" className="theme-btn" style={{marginTop: '15px', display: 'inline-block'}}>Checkout</a>
-                  </div>
-                </div>
-                <div className="contact-info" style={{marginTop: '30px'}}>
-                  <h4>Contact Info</h4>
-                  <ul>
-                    <li>12423 Hamill Path Drive</li>
-                    <li><a href="tel:8602729738">860 -272 -9738</a></li>
-                    <li><a href="mailto:info@kingzsmokeringzbbq.com">info@kingzsmokeringzbbq.com</a></li>
-                  </ul>
-                </div>
-                <ul className="social-box">
-                  <li className="instagram"><a href="https://instagram.com/kingzsmokeringzbbq" className="fab fa-instagram"></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* END cart sidebar */}
     </>
   );
 }

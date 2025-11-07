@@ -1,8 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kingz Smoke Ringz BBQ Website
+
+A Next.js-powered BBQ restaurant website with online ordering and Stripe payment integration.
+
+## Features
+
+- Full menu with categories (Lunch Specials, Meats, Dinners, Sandwiches, Baked Potatoes, Sides, Drinks)
+- Shopping cart with real-time updates
+- Secure checkout with Stripe payment processing
+- Customer information collection
+- Order metadata tracking
+- Mobile-responsive design
+- Catering and Events pages
+
+## Payment Integration
+
+This project includes a complete Stripe integration for secure online payments:
+- **Quick Start:** See [STRIPE_QUICKSTART.md](./STRIPE_QUICKSTART.md) to test in 5 minutes
+- **Full Setup:** See [STRIPE_SETUP.md](./STRIPE_SETUP.md) for production deployment
 
 ## Getting Started
 
-First, run the development server:
+First, set up your environment variables (required for payment processing):
+
+```bash
+cp .env.local.example .env.local
+# Edit .env.local and add your Stripe API keys
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
