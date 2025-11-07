@@ -5,8 +5,8 @@ export async function GET(request) {
     envLoaded: {
       hasAccessToken: !!process.env.SQUARE_ACCESS_TOKEN,
       hasAppId: !!process.env.NEXT_PUBLIC_SQUARE_APPLICATION_ID,
-      hasLocationId: !!process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID,
-      environment: process.env.NEXT_PUBLIC_SQUARE_ENVIRONMENT || 'not set',
+      hasLocationId: !!process.env.SQUARE_LOCATION_ID,
+      environment: process.env.SQUARE_ENVIRONMENT || 'not set',
       accessTokenLength: process.env.SQUARE_ACCESS_TOKEN?.length || 0
     }
   });
