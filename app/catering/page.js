@@ -48,8 +48,8 @@ export default function Catering() {
                       <li><a href="/">Home</a></li>
                       <li><a href="/menu">Menu</a></li>
                       <li className="current"><a href="/catering">Catering</a></li>
-                      
-                      
+
+                      <li><a href="/promotions">Promotions</a></li>
                       <li><a href="/events">Events</a></li>
                     </ul>
                   </div>
@@ -73,7 +73,7 @@ export default function Catering() {
                       </ul>
                     </div>
                   </li>
-                
+
                   <li className="cart-box">
                     <a href="#" className='nav-toggler navSidebar-button' >
                       <i className="flaticon-shopping-cart-1"></i>
@@ -104,8 +104,8 @@ export default function Catering() {
                       <li><a href="/">Home</a></li>
                       <li><a href="/menu">Menu</a></li>
                       <li className="current"><a href="/catering">Catering</a></li>
-                      
-                      
+
+                      <li><a href="/promotions">Promotions</a></li>
                       <li><a href="/events">Events</a></li>
                     </ul>
                   </div>
