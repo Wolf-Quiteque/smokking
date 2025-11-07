@@ -24,21 +24,26 @@ Your app has been successfully migrated from Stripe to Square for both menu mana
 
 ### Environment Variables (`.env.local`)
 
+**CRITICAL SECURITY NOTE**: Never use `NEXT_PUBLIC_` prefix for secrets! Anything with `NEXT_PUBLIC_` is exposed to the browser.
+
 ```env
-# Square Access Token (server-side only - KEEP SECRET!)
+# Server-side only variables (NEVER use NEXT_PUBLIC_ for these!)
 SQUARE_ACCESS_TOKEN=your_access_token
+SQUARE_SANDBOX_ACCESS_TOKEN=your_sandbox_token  # Optional: separate sandbox token
+SQUARE_ENVIRONMENT=sandbox  # or "production"
+SQUARE_LOCATION_ID=your_location_id
 
-# Square Application ID (public - used in browser)
+# Client-side variables (safe to expose in browser for Square SDK)
 NEXT_PUBLIC_SQUARE_APPLICATION_ID=your_app_id
-
-# Square Location ID (your business location)
-NEXT_PUBLIC_SQUARE_LOCATION_ID=your_location_id
-
-# Square Environment (sandbox for testing, production for live)
-NEXT_PUBLIC_SQUARE_ENVIRONMENT=sandbox
+NEXT_PUBLIC_SQUARE_LOCATION_ID=your_location_id  # Same as above, for browser SDK
 ```
 
 **Current Setup**: Using sandbox credentials for testing
+
+**Why two LOCATION_ID variables?**
+- `SQUARE_LOCATION_ID` - Used by server-side API routes
+- `NEXT_PUBLIC_SQUARE_LOCATION_ID` - Used by browser-side Square Web Payments SDK
+- Both should have the same value, but kept separate for security isolation
 
 ## How It Works
 
@@ -146,7 +151,7 @@ The app will automatically fall back to your existing hardcoded menu if:
 
 ### Test in Sandbox Mode
 
-1. Make sure `.env.local` has `NEXT_PUBLIC_SQUARE_ENVIRONMENT=sandbox`
+1. Make sure `.env.local` has `SQUARE_ENVIRONMENT=sandbox`
 2. Start dev server: `npm run dev`
 3. Visit `http://localhost:3000/menu`
 4. Menu should load (from Square or fallback)
@@ -182,10 +187,14 @@ The app will automatically fall back to your existing hardcoded menu if:
 
 ### 2. Update Environment Variables
 ```env
+# Server-side only (NEVER use NEXT_PUBLIC_ for these!)
 SQUARE_ACCESS_TOKEN=your_production_token
+SQUARE_ENVIRONMENT=production
+SQUARE_LOCATION_ID=your_production_location_id
+
+# Client-side (safe to expose for Square SDK)
 NEXT_PUBLIC_SQUARE_APPLICATION_ID=your_production_app_id
 NEXT_PUBLIC_SQUARE_LOCATION_ID=your_production_location_id
-NEXT_PUBLIC_SQUARE_ENVIRONMENT=production
 ```
 
 ### 3. Update Square SDK URL
@@ -215,7 +224,7 @@ npm start
 ### Payment Form Not Showing
 - Verify Square Web Payments SDK is loading (check browser console)
 - Check `.env.local` has correct `NEXT_PUBLIC_SQUARE_APPLICATION_ID`
-- Ensure `NEXT_PUBLIC_SQUARE_LOCATION_ID` is set
+- Ensure both `SQUARE_LOCATION_ID` and `NEXT_PUBLIC_SQUARE_LOCATION_ID` are set
 
 ### "Invalid Credentials" Error
 - Double-check all credentials in `.env.local`
@@ -224,7 +233,7 @@ npm start
 
 ### Payment Declined
 - Check you're using valid test card numbers in sandbox
-- Verify `NEXT_PUBLIC_SQUARE_LOCATION_ID` is correct
+- Verify both `SQUARE_LOCATION_ID` and `NEXT_PUBLIC_SQUARE_LOCATION_ID` are correct
 - Check Square Dashboard for payment details
 
 ## File Structure

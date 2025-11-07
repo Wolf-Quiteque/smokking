@@ -16,7 +16,7 @@ export async function POST(request) {
     }
 
     // Check if credentials are configured
-    if (!process.env.SQUARE_ACCESS_TOKEN || !process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID) {
+    if (!process.env.SQUARE_ACCESS_TOKEN || !process.env.SQUARE_LOCATION_ID) {
       console.error('Square credentials not configured');
       return NextResponse.json(
         { success: false, error: 'Payment system is not configured' },
@@ -51,7 +51,7 @@ export async function POST(request) {
         amount: amountInCents,
         currency: 'USD',
       },
-      locationId: process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID,
+      locationId: process.env.SQUARE_LOCATION_ID,
       note: `Order from ${customerInfo.name || 'Customer'}`,
       buyerEmailAddress: customerInfo.email,
       billingAddress: customerInfo.address ? {
@@ -65,7 +65,7 @@ export async function POST(request) {
     try {
       const orderResponse = await client.ordersApi.createOrder({
         order: {
-          locationId: process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID,
+          locationId: process.env.SQUARE_LOCATION_ID,
           lineItems,
           state: 'COMPLETED',
           metadata: {
