@@ -1,4 +1,10 @@
+'use client';
+
+import { useCart } from '../../lib/CartContext';
+
 export default function Packages() {
+  const { getTotalItems, toggleCart } = useCart();
+
   return (
     <>
       {/* main header */}
@@ -42,8 +48,8 @@ export default function Packages() {
                       <li><a href="/">Home</a></li>
                       <li><a href="/menu">Menu</a></li>
                       <li><a href="/catering">Catering</a></li>
-                      <li className="current"><a href="/packages">Packages</a></li>
-                      
+
+                      <li><a href="/promotions">Promotions</a></li>
                       <li><a href="/events">Events</a></li>
                     </ul>
                   </div>
@@ -67,7 +73,13 @@ export default function Packages() {
                       </ul>
                     </div>
                   </li>
-                  <li className="cart-box"><a href="#"><i className="flaticon-shopping-cart-1"></i><span>0</span></a></li>
+
+                  <li className="cart-box">
+                    <a href="#" className='nav-toggler navSidebar-button' >
+                      <i className="flaticon-shopping-cart-1"></i>
+                      <span>{getTotalItems()}</span>
+                    </a>
+                  </li>
                   <li className="nav-box">
                     <div className="nav-btn nav-toggler navSidebar-button clearfix">
                       <i className="flaticon-list"></i>
@@ -92,8 +104,8 @@ export default function Packages() {
                       <li><a href="/">Home</a></li>
                       <li><a href="/menu">Menu</a></li>
                       <li><a href="/catering">Catering</a></li>
-                      <li className="current"><a href="/packages">Packages</a></li>
-                      
+
+                      <li><a href="/promotions">Promotions</a></li>
                       <li><a href="/events">Events</a></li>
                     </ul>
                   </div>
