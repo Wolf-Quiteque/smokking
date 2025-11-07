@@ -645,7 +645,7 @@ img {
   bottom:0;
   width:100%;
   max-width:360px;
-  z-index:999999;
+  z-index:1000000;
   overflow:hidden;
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
