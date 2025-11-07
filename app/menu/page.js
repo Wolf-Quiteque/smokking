@@ -12,12 +12,12 @@ export default function Menu() {
   // Menu data structure
   const menuData = {
     'lunch-specials': [
-      { id: 1, name: '2-3 Baby Back Ribs, Side, & Drink', price: 14.40, description: 'Easy lunch with top sellers.', image: '/images/resource/shop/shop-1.jpg', category: 'lunch-specials', prepTime: 0, orderType: 'On Hand' },
-      { id: 2, name: '1/2lb. Brisket, Side, & Drink', price: 14.40, description: 'Easy lunch with top sellers.', image: '/images/resource/shop/shop-2.jpg', category: 'lunch-specials', prepTime: 0, orderType: 'On Hand' },
-      { id: 3, name: 'Turkey Leg, Side, & Drink', price: 18.00, description: 'Easy lunch with top sellers. Requires 8 hours advance notice.', image: '/images/resource/shop/shop-3.jpg', category: 'lunch-specials', prepTime: 8, orderType: 'Custom Order' }
+      { id: 1, name: '2-3 Baby Back Ribs, Side, & Drink', price: 14.40, description: 'Easy lunch with top sellers.', image: '/images/menu/shop-2.png', category: 'lunch-specials', prepTime: 0, orderType: 'On Hand' },
+      { id: 2, name: '1/2lb. Brisket, Side, & Drink', price: 14.40, description: 'Easy lunch with top sellers.', image: '/images/menu/shop-3.png', category: 'lunch-specials', prepTime: 0, orderType: 'On Hand' },
+      { id: 3, name: 'Turkey Leg, Side, & Drink', price: 18.00, description: 'Easy lunch with top sellers. Requires 8 hours advance notice.', image: '/images/menu/shop-4.png', category: 'lunch-specials', prepTime: 8, orderType: 'Custom Order' }
     ],
     'meats': [
-      { id: 4, name: 'Brisket', price: 30.00, unit: '/ lb', description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/resource/shop/shop-4.jpg', category: 'meats', prepTime: 0, orderType: 'On Hand' },
+      { id: 4, name: 'Brisket', price: 30.00, unit: '/ lb', description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/menu/shop-4.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
       { id: 5, name: 'Pork Roast', price: 25.00, unit: '/ lb', image: '/images/resource/shop/shop-5.jpg', category: 'meats', prepTime: 0, orderType: 'On Hand' },
       { id: 6, name: 'Pork Spare Ribs', price: 36.00, image: '/images/resource/shop/shop-10.jpg', category: 'meats', prepTime: 0, orderType: 'On Hand' },
       { id: 7, name: 'Slab St. Louis Style Ribs', price: 36.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/resource/shop/shop-10.jpg', category: 'meats', prepTime: 0, orderType: 'On Hand' },
