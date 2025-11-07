@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useCart } from '../../lib/CartContext';
 
@@ -9,81 +9,50 @@ export default function Menu() {
   const [priceRange, setPriceRange] = useState([0, 50]);
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [menuData, setMenuData] = useState({});
+  const [isLoadingMenu, setIsLoadingMenu] = useState(true);
+  const [menuError, setMenuError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
 
-  // Menu data structure
-  const menuData = {
-    'lunch-specials': [
-      { id: 1, name: '2-3 Baby Back Ribs, Side, & Drink', price: 14.40, description: 'Easy lunch with top sellers.', image: '/images/menu/shop-2.png', category: 'lunch-specials', prepTime: 0, orderType: 'On Hand' },
-      { id: 2, name: '1/2lb. Brisket, Side, & Drink', price: 14.40, description: 'Easy lunch with top sellers.', image: '/images/menu/shop-3.png', category: 'lunch-specials', prepTime: 0, orderType: 'On Hand' },
-      { id: 3, name: 'Turkey Leg, Side, & Drink', price: 18.00, description: 'Easy lunch with top sellers. Requires 8 hours advance notice.', image: '/images/menu/shop-4.png', category: 'lunch-specials', prepTime: 8, orderType: 'Custom Order' }
-    ],
-    'meats': [
-      { id: 4, name: 'Brisket', price: 30.00, unit: '/ lb', description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/menu/shop-5.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 5, name: 'Pork Roast', price: 25.00, unit: '/ lb', image: '/images/menu/shop-6.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 6, name: 'Pork Spare Ribs', price: 36.00, image: '/images/menu/shop-7.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 7, name: 'Slab St. Louis Style Ribs', price: 36.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/menu/shop-10.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 8, name: 'Slab Baby Back Ribs', price: 42.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/menu/shop-11.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 9, name: '1lb. Chicken', price: 20.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/menu/shop-12.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 10, name: '1lb. Hot links', price: 20.00, image: '/images/menu/shop-13.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 11, name: '1lb. Boudin Links', price: 20.00, image: '/images/menu/shop-1.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 12, name: '1lb. Mild Sausage', price: 20.00, image: '/images/menu/shop-2.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 13, name: '1lb. Cajun Sausage', price: 20.00, image: '/images/menu/shop-3.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 54, name: '1lb. Turkey Wings', price: 25.00, description: 'Requires 8 hours advance notice. Kept frozen; require prep before cooking.', image: '/images/menu/shop-4.png', category: 'meats', prepTime: 8, orderType: 'Custom Order' },
-      { id: 55, name: 'Turkey Leg', price: 25.00, description: 'Requires 8 hours advance notice. Kept frozen; require prep before cooking.', image: '/images/menu/shop-5.png', category: 'meats', prepTime: 8, orderType: 'Custom Order' },
-      { id: 56, name: 'Oxtails', price: 35.00, unit: '/ lb', description: 'Requires 48 hours advance notice. Must be purchased fresh and slow-cooked.', image: '/images/menu/shop-10.png', category: 'meats', prepTime: 48, orderType: 'Custom Order' }
-    ],
-    'dinners': [
-      { id: 14, name: 'Kingz Special Dinner', price: 28.00, description: 'Brisket, sausage, and ribs with two sides.', image: '/images/menu/shop-1.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 15, name: 'Brisket Dinner', price: 20.00, description: 'Brisket with two sides.', image: '/images/menu/shop-2.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 16, name: 'Rib Dinner', price: 20.00, description: 'Ribs with two sides.', image: '/images/menu/shop-3.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 17, name: 'Chicken Dinner', price: 16.00, description: 'Chicken with two sides.', image: '/images/menu/shop-4.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 18, name: 'Boudin Link Dinner', price: 17.00, description: 'Boudin links with two sides.', image: '/images/menu/shop-5.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 19, name: 'Sausage Dinner', price: 17.00, description: 'Sausage with two sides.', image: '/images/menu/shop-10.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 20, name: 'Two Meat Dinner', price: 22.00, description: 'Two meats with two sides.', image: '/images/menu/shop-11.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 21, name: 'Homemade Beef Link Dinner', price: 17.00, description: 'Beef links with two sides.', image: '/images/menu/shop-12.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 22, name: 'Turkey Leg Dinner', price: 22.00, description: 'Turkey leg with two sides. Requires 8 hours advance notice.', image: '/images/menu/shop-13.png', category: 'dinners', prepTime: 8, orderType: 'Custom Order' },
-      { id: 57, name: 'Turkey Wings Dinner', price: 25.00, description: 'Turkey wings with two sides. Requires 8 hours advance notice.', image: '/images/menu/shop-1.png', category: 'dinners', prepTime: 8, orderType: 'Custom Order' }
-    ],
-    'sandwiches': [
-      { id: 23, name: 'Sliced/Chopped Brisket Sandwich', price: 13.00, image: '/images/menu/shop-4.png', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
-      { id: 24, name: 'Kingz\' Sandwich', price: 15.00, description: 'Brisket & sausage.', image: '/images/menu/shop-5.png', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
-      { id: 25, name: 'Rib Sandwich', price: 13.00, image: '/images/menu/shop-10.png', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
-      { id: 26, name: 'Sausage Sandwich', price: 12.00, image: '/images/menu/shop-11.png', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
-      { id: 27, name: 'Boudain Link & Crackers Sandwich', price: 12.00, image: '/images/menu/shop-12.png', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
-      { id: 28, name: 'Homemade Link Sandwich', price: 12.00, image: '/images/menu/shop-13.png', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' }
-    ],
-    'baked-potatoes': [
-      { id: 29, name: 'Big Kingz\' Potato', price: 25.00, description: 'Chopped Brisket, Sausage & Ribs, stuffed with butter, cheese, sour cream, chives.', image: '/images/menu/shop-11.png', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
-      { id: 30, name: 'Baby Back Rib Potato', price: 25.00, description: 'Ribs, stuffed with butter, cheese, sour cream, chives.', image: '/images/menu/shop-12.png', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
-      { id: 31, name: 'St. Louis Style Rib Potato', price: 25.00, description: 'Ribs, stuffed with butter, cheese, sour cream, chives.', image: '/images/menu/shop-13.png', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
-      { id: 32, name: 'Lil Kingz\' Chopped Beef Potato', price: 20.00, description: 'Chopped beef, stuffed with butter, cheese, sour cream, chives.', image: '/images/menu/shop-1.png', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
-      { id: 33, name: 'Sausage Potato', price: 15.00, description: 'Sausage, stuffed with butter, cheese, sour cream, chives.', image: '/images/menu/shop-2.png', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
-      { id: 34, name: 'Chicken Potato', price: 15.00, description: 'Chicken, stuffed with butter, cheese, sour cream, chives.', image: '/images/menu/shop-3.png', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' }
-    ],
-    'sides': [
-      { id: 35, name: 'Dirty Rice', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/menu/shop-1.png', category: 'sides', prepTime: 0, orderType: 'On Hand' },
-      { id: 36, name: 'Green Beans', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/menu/shop-2.png', category: 'sides', prepTime: 0, orderType: 'On Hand' },
-      { id: 37, name: 'Sweet Beans', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/menu/shop-3.png', category: 'sides', prepTime: 0, orderType: 'On Hand' },
-      { id: 38, name: 'Pinto Beans', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/menu/shop-4.png', category: 'sides', prepTime: 0, orderType: 'On Hand' },
-      { id: 39, name: 'Potato Salad', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/menu/shop-5.png', category: 'sides', prepTime: 0, orderType: 'On Hand' },
-      { id: 40, name: 'Broccoli Cheese Rice Casserole', price: 9.50, priceRange: '$9.50 - $95.00', image: '/images/menu/shop-10.png', category: 'sides', prepTime: 0, orderType: 'On Hand' }
-    ],
-    'drinks': [
-      { id: 41, name: 'Water', price: 1.00, description: 'Refreshing bottled water.', image: '/images/menu/shop-4.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 42, name: 'Juice - Mango Punch', price: 3.00, description: 'Kingz\' signature juice flavors.', image: '/images/menu/shop-5.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 43, name: 'Juice - Fruit Punch', price: 3.00, description: 'Kingz\' signature juice flavors.', image: '/images/menu/shop-10.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 44, name: 'Juice - Watermelon Punch', price: 3.00, description: 'Kingz\' signature juice flavors.', image: '/images/menu/shop-11.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 45, name: 'Kingz\' Famous Tea', price: 3.00, description: 'Our signature sweet tea.', image: '/images/menu/shop-12.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 46, name: 'Pepsi', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-13.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 47, name: 'Mtn Dew', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-1.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 48, name: 'Pepsi Mango', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-2.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 49, name: 'Mtn Dew Code Red', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-3.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 50, name: 'Starry', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-4.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 51, name: 'Mtn Dew Frost Bite', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-5.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 52, name: 'Mug Root Beer', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-10.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 53, name: 'Mtn Dew Pitch Black', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-11.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' }
-    ]
-  };
+  // Fetch menu from Square API
+  useEffect(() => {
+    async function fetchSquareMenu() {
+      try {
+        setIsLoadingMenu(true);
+        const response = await fetch('/api/square/menu?menu=BBQ');
+        const data = await response.json();
+
+        if (data.success && data.items && data.items.length > 0) {
+          // Group items by category
+          const grouped = data.items.reduce((acc, item) => {
+            const category = item.category || 'other';
+            if (!acc[category]) {
+              acc[category] = [];
+            }
+            acc[category].push(item);
+            return acc;
+          }, {});
+
+          setMenuData(grouped);
+          setMenuError(null);
+        } else {
+          // If no items from Square, show error
+          console.error('No items returned from Square API');
+          setMenuError('Failed to load menu items from Square.');
+          setMenuData({});
+        }
+      } catch (error) {
+        console.error('Error fetching Square menu:', error);
+        setMenuError('Failed to load menu from Square. Please try again later.');
+        setMenuData({});
+      } finally {
+        setIsLoadingMenu(false);
+      }
+    }
+
+    fetchSquareMenu();
+  }, []);
 
   // Flatten menu data for filtering
   const allMenuItems = Object.values(menuData).flat();
@@ -94,19 +63,129 @@ export default function Menu() {
     if (activeCategory !== 'all' && item.category !== activeCategory) {
       return false;
     }
-    
+
     // Price range filter
     if (item.price < priceRange[0] || item.price > priceRange[1]) {
       return false;
     }
-    
+
     // Search term filter
     if (searchTerm && !item.name.toLowerCase().includes(searchTerm.toLowerCase())) {
       return false;
     }
-    
+
     return true;
   });
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItems = filteredItems.slice(startIndex, endIndex);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeCategory, searchTerm, priceRange]);
+
+  // Pagination component
+  const renderPagination = () => {
+    if (totalPages <= 1) return null;
+
+    const pageNumbers = [];
+    const maxVisiblePages = 5;
+
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+    if (endPage - startPage < maxVisiblePages - 1) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    return (
+      <nav aria-label="Page navigation" style={{ marginTop: '40px' }}>
+        <ul className="pagination justify-content-center">
+          <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+            <button
+              className="page-link"
+              onClick={() => setCurrentPage(1)}
+              disabled={currentPage === 1}
+              aria-label="First"
+            >
+              <span aria-hidden="true">&laquo;&laquo;</span>
+            </button>
+          </li>
+          <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+            <button
+              className="page-link"
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+              aria-label="Previous"
+            >
+              <span aria-hidden="true">&laquo;</span>
+            </button>
+          </li>
+
+          {startPage > 1 && (
+            <>
+              <li className="page-item">
+                <button className="page-link" onClick={() => setCurrentPage(1)}>1</button>
+              </li>
+              {startPage > 2 && <li className="page-item disabled"><span className="page-link">...</span></li>}
+            </>
+          )}
+
+          {pageNumbers.map(number => (
+            <li key={number} className={`page-item ${currentPage === number ? 'active' : ''}`}>
+              <button
+                className="page-link"
+                onClick={() => setCurrentPage(number)}
+              >
+                {number}
+              </button>
+            </li>
+          ))}
+
+          {endPage < totalPages && (
+            <>
+              {endPage < totalPages - 1 && <li className="page-item disabled"><span className="page-link">...</span></li>}
+              <li className="page-item">
+                <button className="page-link" onClick={() => setCurrentPage(totalPages)}>{totalPages}</button>
+              </li>
+            </>
+          )}
+
+          <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+            <button
+              className="page-link"
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              disabled={currentPage === totalPages}
+              aria-label="Next"
+            >
+              <span aria-hidden="true">&raquo;</span>
+            </button>
+          </li>
+          <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+            <button
+              className="page-link"
+              onClick={() => setCurrentPage(totalPages)}
+              disabled={currentPage === totalPages}
+              aria-label="Last"
+            >
+              <span aria-hidden="true">&raquo;&raquo;</span>
+            </button>
+          </li>
+        </ul>
+        <div className="text-center mt-3" style={{ color: '#666' }}>
+          <small>Showing {startIndex + 1}-{Math.min(endIndex, filteredItems.length)} of {filteredItems.length} items</small>
+        </div>
+      </nav>
+    );
+  };
 
 
   // Handle price range change
@@ -206,6 +285,36 @@ export default function Menu() {
       </div>
     ));
   };
+
+  // Show loading state
+  if (isLoadingMenu) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        flexDirection: 'column',
+        gap: '20px'
+      }}>
+        <div style={{
+          width: '50px',
+          height: '50px',
+          border: '5px solid #f3f3f3',
+          borderTop: '5px solid #ff6b35',
+          borderRadius: '50%',
+          animation: 'spin 1s linear infinite'
+        }}></div>
+        <h3 style={{ color: '#333' }}>Loading Menu...</h3>
+        <style jsx>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -322,6 +431,25 @@ export default function Menu() {
       {/* shop-page-section */}
       <section className="shop-page-section sec-pad">
         <div className="auto-container">
+          {/* Show error message if menu failed to load from Square */}
+          {menuError && (
+            <div style={{
+              background: '#fff3cd',
+              border: '1px solid #ffc107',
+              color: '#856404',
+              padding: '15px 20px',
+              borderRadius: '8px',
+              marginBottom: '30px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px'
+            }}>
+              <i className="fas fa-exclamation-triangle" style={{ fontSize: '20px' }}></i>
+              <div>
+                <strong>Notice:</strong> {menuError}
+              </div>
+            </div>
+          )}
           <div className="row clearfix">
             <div className="col-lg-3 col-md-12 col-sm-12 sidebar-side">
               <div className="sidebar shop-sidebar">
@@ -433,101 +561,82 @@ export default function Menu() {
               <div className="our-shop">
                 {searchTerm || activeCategory !== 'all' || (priceRange[0] > 0 || priceRange[1] < 50) ? (
                   <>
-                    <div className="filter-results-header">
+                    <div className="filter-results-header" style={{ marginBottom: '30px' }}>
                       <h3>
                         {filteredItems.length} {filteredItems.length === 1 ? 'Item' : 'Items'} Found
                         {(searchTerm || activeCategory !== 'all' || (priceRange[0] > 0 || priceRange[1] < 50)) && (
-                          <button 
+                          <button
                             onClick={() => {
                               setSearchTerm('');
                               setActiveCategory('all');
                               setPriceRange([0, 50]);
-                            }} 
+                            }}
                             className="clear-filters-btn"
                             style={{
                               marginLeft: '15px',
-                              background: '#f8f8f8',
-                              border: '1px solid #ddd',
-                              padding: '5px 10px',
+                              background: '#ff6b35',
+                              color: 'white',
+                              border: 'none',
+                              padding: '8px 16px',
                               borderRadius: '4px',
-                              fontSize: '12px'
+                              fontSize: '13px',
+                              cursor: 'pointer'
                             }}
                           >
+                            <i className="fas fa-times" style={{ marginRight: '5px' }}></i>
                             Clear Filters
                           </button>
                         )}
                       </h3>
                     </div>
                     <div className="row clearfix">
-                      {filteredItems.length > 0 ? (
-                        renderMenuItems(filteredItems)
+                      {currentItems.length > 0 ? (
+                        renderMenuItems(currentItems)
                       ) : (
                         <div className="col-12">
-                          <div className="no-results">
+                          <div className="no-results" style={{
+                            textAlign: 'center',
+                            padding: '60px 20px',
+                            background: '#f8f9fa',
+                            borderRadius: '10px'
+                          }}>
+                            <i className="fas fa-search" style={{ fontSize: '48px', color: '#ddd', marginBottom: '20px' }}></i>
                             <h4>No items match your filters</h4>
-                            <p>Try adjusting your search or filters</p>
+                            <p style={{ color: '#666' }}>Try adjusting your search or filters</p>
                           </div>
                         </div>
                       )}
                     </div>
+                    {renderPagination()}
                   </>
                 ) : (
                   <>
-                    {/* Lunch Specials */}
-                    <div id="lunch-specials" className="menu-category">
-                      <h2 className="category-title">Lunch Specials</h2>
-                      <div className="row clearfix">
-                        {renderMenuItems(menuData['lunch-specials'])}
-                      </div>
-                    </div>
+                    {Object.keys(menuData).map(category => {
+                      const categoryItems = menuData[category] || [];
+                      if (categoryItems.length === 0) return null;
 
-                    {/* Meats */}
-                    <div id="meats" className="menu-category">
-                      <h2 className="category-title">Meats</h2>
-                      <div className="row clearfix">
-                        {renderMenuItems(menuData['meats'])}
-                      </div>
-                    </div>
+                      const categoryTitle = category
+                        .split('-')
+                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                        .join(' ');
 
-                    {/* Dinners */}
-                    <div id="dinners" className="menu-category">
-                      <h2 className="category-title">Dinners</h2>
-                      <div className="row clearfix">
-                        {renderMenuItems(menuData['dinners'])}
-                      </div>
-                    </div>
-
-                    {/* Sandwiches */}
-                    <div id="sandwiches" className="menu-category">
-                      <h2 className="category-title">Sandwiches</h2>
-                      <div className="row clearfix">
-                        {renderMenuItems(menuData['sandwiches'])}
-                      </div>
-                    </div>
-
-                    {/* Baked Potatoes */}
-                    <div id="baked-potatoes" className="menu-category">
-                      <h2 className="category-title">Baked Potatoes</h2>
-                      <div className="row clearfix">
-                        {renderMenuItems(menuData['baked-potatoes'])}
-                      </div>
-                    </div>
-
-                    {/* Sides */}
-                    <div id="sides" className="menu-category">
-                      <h2 className="category-title">Sides</h2>
-                      <div className="row clearfix">
-                        {renderMenuItems(menuData['sides'])}
-                      </div>
-                    </div>
-
-                    {/* Drinks */}
-                    <div id="drinks" className="menu-category">
-                      <h2 className="category-title">Drinks</h2>
-                      <div className="row clearfix">
-                        {renderMenuItems(menuData['drinks'])}
-                      </div>
-                    </div>
+                      return (
+                        <div key={category} id={category} className="menu-category" style={{ marginBottom: '50px' }}>
+                          <h2 className="category-title" style={{
+                            fontSize: '28px',
+                            fontWeight: 'bold',
+                            marginBottom: '20px',
+                            paddingBottom: '10px',
+                            borderBottom: '3px solid #ff6b35'
+                          }}>
+                            {categoryTitle}
+                          </h2>
+                          <div className="row clearfix">
+                            {renderMenuItems(categoryItems)}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </>
                 )}
               </div>
@@ -536,6 +645,71 @@ export default function Menu() {
         </div>
       </section>
       {/* shop-page-section end */}
+
+      {/* Custom pagination styles */}
+      <style jsx>{`
+        .pagination {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+        }
+
+        .pagination .page-item {
+          list-style: none;
+        }
+
+        .pagination .page-link {
+          position: relative;
+          display: block;
+          padding: 0.5rem 0.75rem;
+          margin: 0;
+          line-height: 1.25;
+          color: #333;
+          background-color: #fff;
+          border: 1px solid #dee2e6;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .pagination .page-link:hover {
+          z-index: 2;
+          color: #fff;
+          background-color: #ff6b35;
+          border-color: #ff6b35;
+        }
+
+        .pagination .page-item.active .page-link {
+          z-index: 3;
+          color: #fff;
+          background-color: #ff6b35;
+          border-color: #ff6b35;
+        }
+
+        .pagination .page-item.disabled .page-link {
+          color: #6c757d;
+          pointer-events: none;
+          cursor: auto;
+          background-color: #fff;
+          border-color: #dee2e6;
+          opacity: 0.5;
+        }
+
+        .pagination .page-link:focus {
+          z-index: 3;
+          outline: 0;
+          box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+        }
+
+        @media (max-width: 768px) {
+          .pagination {
+            font-size: 14px;
+          }
+
+          .pagination .page-link {
+            padding: 0.4rem 0.6rem;
+          }
+        }
+      `}</style>
     </>
   );
 }

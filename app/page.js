@@ -205,7 +205,7 @@ export default function Home() {
                             <div className="lower-content">
                                 <div className="inner">
                                     <h6><a href="menu">Premium Brisket</a></h6>
-                                    <span className="price">$ 30.00/lb</span>
+                                    <span className="price">$ 35.00/lb</span>
                                 </div>
                             </div>
                         </div>
@@ -262,7 +262,7 @@ export default function Home() {
                             <div className="lower-content">
                                 <div className="inner">
                                     <h6><a href="menu">Kingz Special Dinner</a></h6>
-                                    <span className="price">$ 28.00</span>
+                                    <span className="price">$ 30.00</span>
                                 </div>
                             </div>
                         </div>

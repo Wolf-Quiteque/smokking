@@ -4,7 +4,20 @@
       "Bash(npm install:*)",
       "Bash(mkdir:*)",
       "Bash(netstat:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(.env.local)",
+      "Bash(npm uninstall:*)",
+      "Bash(if [ -f .gitignore ])",
+      "Bash(then cat .gitignore)",
+      "Bash(else echo \"# No .gitignore found\")",
+      "Bash(fi)",
+      "Bash(cat:*)",
+      "Bash(if [ -f .env ])",
+      "Bash(then cat .env)",
+      "Bash(else echo \"# No .env found\")",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(python -m json.tool:*)"
     ],
     "deny": [],
     "ask": []

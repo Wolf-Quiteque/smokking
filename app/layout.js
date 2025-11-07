@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { CartProvider, useCart } from '../lib/CartContext';
-import CheckoutModal from '../lib/CheckoutModal';
+import SquareCheckoutModal from '../lib/SquareCheckoutModal';
 import Preloader from '../components/Preloader';
 import { useState } from 'react';
 
@@ -41,6 +41,11 @@ function LayoutContent({ children, pathname }) {
         {/* Google Fonts */}
         <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;300;400;500;700;800;900&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+        {/* Square Web Payments SDK */}
+        <script
+          type="text/javascript"
+          src="https://sandbox.web.squarecdn.com/v1/square.js"
+        ></script>
         {/* Stylesheets */}
         <link href="/css/font-awesome-all.css" rel="stylesheet" />
         <link href="/css/flaticon.css" rel="stylesheet" />
@@ -307,7 +312,7 @@ function LayoutContent({ children, pathname }) {
   {children}
 
         {/* Checkout Modal */}
-        <CheckoutModal
+        <SquareCheckoutModal
           isOpen={isCheckoutModalOpen}
           onClose={() => setIsCheckoutModalOpen(false)}
           cart={cart}
