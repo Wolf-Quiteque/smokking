@@ -224,7 +224,7 @@ export default function Home() {
                             <div className="lower-content">
                                 <div className="inner">
                                     <h6><a href="menu">Baby Back Ribs</a></h6>
-                                    <span className="price">$ 36.00</span>
+                                    <span className="price">$ 42.00</span>
                                 </div>
                             </div>
                         </div>
