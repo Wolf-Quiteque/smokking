@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useCart } from '../../lib/CartContext';
 
 export default function Menu() {
@@ -17,70 +18,70 @@ export default function Menu() {
       { id: 3, name: 'Turkey Leg, Side, & Drink', price: 18.00, description: 'Easy lunch with top sellers. Requires 8 hours advance notice.', image: '/images/menu/shop-4.png', category: 'lunch-specials', prepTime: 8, orderType: 'Custom Order' }
     ],
     'meats': [
-      { id: 4, name: 'Brisket', price: 30.00, unit: '/ lb', description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/menu/shop-4.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 5, name: 'Pork Roast', price: 25.00, unit: '/ lb', image: '/images/resource/shop/shop-5.jpg', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 6, name: 'Pork Spare Ribs', price: 36.00, image: '/images/resource/shop/shop-10.jpg', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 7, name: 'Slab St. Louis Style Ribs', price: 36.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/resource/shop/shop-10.jpg', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 8, name: 'Slab Baby Back Ribs', price: 42.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/resource/shop/shop-11.jpg', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 9, name: '1lb. Chicken', price: 20.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/resource/shop/shop-12.jpg', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 10, name: '1lb. Hot links', price: 20.00, image: '/images/resource/shop/shop-13.jpg', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 11, name: '1lb. Boudin Links', price: 20.00, image: '/images/resource/shop/shop-1.jpg', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 12, name: '1lb. Mild Sausage', price: 20.00, image: '/images/resource/shop/shop-2.jpg', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 13, name: '1lb. Cajun Sausage', price: 20.00, image: '/images/resource/shop/shop-3.jpg', category: 'meats', prepTime: 0, orderType: 'On Hand' },
-      { id: 54, name: '1lb. Turkey Wings', price: 25.00, description: 'Requires 8 hours advance notice. Kept frozen; require prep before cooking.', image: '/images/resource/shop/shop-4.jpg', category: 'meats', prepTime: 8, orderType: 'Custom Order' },
-      { id: 55, name: 'Turkey Leg', price: 25.00, description: 'Requires 8 hours advance notice. Kept frozen; require prep before cooking.', image: '/images/resource/shop/shop-5.jpg', category: 'meats', prepTime: 8, orderType: 'Custom Order' },
-      { id: 56, name: 'Oxtails', price: 35.00, unit: '/ lb', description: 'Requires 48 hours advance notice. Must be purchased fresh and slow-cooked.', image: '/images/resource/shop/shop-10.jpg', category: 'meats', prepTime: 48, orderType: 'Custom Order' }
+      { id: 4, name: 'Brisket', price: 30.00, unit: '/ lb', description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/menu/shop-5.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
+      { id: 5, name: 'Pork Roast', price: 25.00, unit: '/ lb', image: '/images/menu/shop-6.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
+      { id: 6, name: 'Pork Spare Ribs', price: 36.00, image: '/images/menu/shop-7.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
+      { id: 7, name: 'Slab St. Louis Style Ribs', price: 36.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/menu/shop-10.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
+      { id: 8, name: 'Slab Baby Back Ribs', price: 42.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/menu/shop-11.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
+      { id: 9, name: '1lb. Chicken', price: 20.00, description: 'Served with bread & Kingz\' BBQ sauce.', image: '/images/menu/shop-12.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
+      { id: 10, name: '1lb. Hot links', price: 20.00, image: '/images/menu/shop-13.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
+      { id: 11, name: '1lb. Boudin Links', price: 20.00, image: '/images/menu/shop-1.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
+      { id: 12, name: '1lb. Mild Sausage', price: 20.00, image: '/images/menu/shop-2.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
+      { id: 13, name: '1lb. Cajun Sausage', price: 20.00, image: '/images/menu/shop-3.png', category: 'meats', prepTime: 0, orderType: 'On Hand' },
+      { id: 54, name: '1lb. Turkey Wings', price: 25.00, description: 'Requires 8 hours advance notice. Kept frozen; require prep before cooking.', image: '/images/menu/shop-4.png', category: 'meats', prepTime: 8, orderType: 'Custom Order' },
+      { id: 55, name: 'Turkey Leg', price: 25.00, description: 'Requires 8 hours advance notice. Kept frozen; require prep before cooking.', image: '/images/menu/shop-5.png', category: 'meats', prepTime: 8, orderType: 'Custom Order' },
+      { id: 56, name: 'Oxtails', price: 35.00, unit: '/ lb', description: 'Requires 48 hours advance notice. Must be purchased fresh and slow-cooked.', image: '/images/menu/shop-10.png', category: 'meats', prepTime: 48, orderType: 'Custom Order' }
     ],
     'dinners': [
-      { id: 14, name: 'Kingz Special Dinner', price: 28.00, description: 'Brisket, sausage, and ribs with two sides.', image: '/images/resource/shop/shop-1.jpg', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 15, name: 'Brisket Dinner', price: 20.00, description: 'Brisket with two sides.', image: '/images/resource/shop/shop-2.jpg', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 16, name: 'Rib Dinner', price: 20.00, description: 'Ribs with two sides.', image: '/images/resource/shop/shop-3.jpg', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 17, name: 'Chicken Dinner', price: 16.00, description: 'Chicken with two sides.', image: '/images/resource/shop/shop-4.jpg', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 18, name: 'Boudin Link Dinner', price: 17.00, description: 'Boudin links with two sides.', image: '/images/resource/shop/shop-5.jpg', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 19, name: 'Sausage Dinner', price: 17.00, description: 'Sausage with two sides.', image: '/images/resource/shop/shop-10.jpg', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 20, name: 'Two Meat Dinner', price: 22.00, description: 'Two meats with two sides.', image: '/images/resource/shop/shop-11.jpg', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 21, name: 'Homemade Beef Link Dinner', price: 17.00, description: 'Beef links with two sides.', image: '/images/resource/shop/shop-12.jpg', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
-      { id: 22, name: 'Turkey Leg Dinner', price: 22.00, description: 'Turkey leg with two sides. Requires 8 hours advance notice.', image: '/images/resource/shop/shop-13.jpg', category: 'dinners', prepTime: 8, orderType: 'Custom Order' },
-      { id: 57, name: 'Turkey Wings Dinner', price: 25.00, description: 'Turkey wings with two sides. Requires 8 hours advance notice.', image: '/images/resource/shop/shop-1.jpg', category: 'dinners', prepTime: 8, orderType: 'Custom Order' }
+      { id: 14, name: 'Kingz Special Dinner', price: 28.00, description: 'Brisket, sausage, and ribs with two sides.', image: '/images/menu/shop-1.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
+      { id: 15, name: 'Brisket Dinner', price: 20.00, description: 'Brisket with two sides.', image: '/images/menu/shop-2.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
+      { id: 16, name: 'Rib Dinner', price: 20.00, description: 'Ribs with two sides.', image: '/images/menu/shop-3.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
+      { id: 17, name: 'Chicken Dinner', price: 16.00, description: 'Chicken with two sides.', image: '/images/menu/shop-4.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
+      { id: 18, name: 'Boudin Link Dinner', price: 17.00, description: 'Boudin links with two sides.', image: '/images/menu/shop-5.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
+      { id: 19, name: 'Sausage Dinner', price: 17.00, description: 'Sausage with two sides.', image: '/images/menu/shop-10.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
+      { id: 20, name: 'Two Meat Dinner', price: 22.00, description: 'Two meats with two sides.', image: '/images/menu/shop-11.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
+      { id: 21, name: 'Homemade Beef Link Dinner', price: 17.00, description: 'Beef links with two sides.', image: '/images/menu/shop-12.png', category: 'dinners', prepTime: 0, orderType: 'On Hand' },
+      { id: 22, name: 'Turkey Leg Dinner', price: 22.00, description: 'Turkey leg with two sides. Requires 8 hours advance notice.', image: '/images/menu/shop-13.png', category: 'dinners', prepTime: 8, orderType: 'Custom Order' },
+      { id: 57, name: 'Turkey Wings Dinner', price: 25.00, description: 'Turkey wings with two sides. Requires 8 hours advance notice.', image: '/images/menu/shop-1.png', category: 'dinners', prepTime: 8, orderType: 'Custom Order' }
     ],
     'sandwiches': [
-      { id: 23, name: 'Sliced/Chopped Brisket Sandwich', price: 13.00, image: '/images/resource/shop/shop-4.jpg', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
-      { id: 24, name: 'Kingz\' Sandwich', price: 15.00, description: 'Brisket & sausage.', image: '/images/resource/shop/shop-5.jpg', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
-      { id: 25, name: 'Rib Sandwich', price: 13.00, image: '/images/resource/shop/shop-10.jpg', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
-      { id: 26, name: 'Sausage Sandwich', price: 12.00, image: '/images/resource/shop/shop-11.jpg', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
-      { id: 27, name: 'Boudain Link & Crackers Sandwich', price: 12.00, image: '/images/resource/shop/shop-12.jpg', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
-      { id: 28, name: 'Homemade Link Sandwich', price: 12.00, image: '/images/resource/shop/shop-13.jpg', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' }
+      { id: 23, name: 'Sliced/Chopped Brisket Sandwich', price: 13.00, image: '/images/menu/shop-4.png', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
+      { id: 24, name: 'Kingz\' Sandwich', price: 15.00, description: 'Brisket & sausage.', image: '/images/menu/shop-5.png', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
+      { id: 25, name: 'Rib Sandwich', price: 13.00, image: '/images/menu/shop-10.png', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
+      { id: 26, name: 'Sausage Sandwich', price: 12.00, image: '/images/menu/shop-11.png', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
+      { id: 27, name: 'Boudain Link & Crackers Sandwich', price: 12.00, image: '/images/menu/shop-12.png', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' },
+      { id: 28, name: 'Homemade Link Sandwich', price: 12.00, image: '/images/menu/shop-13.png', category: 'sandwiches', prepTime: 0, orderType: 'On Hand' }
     ],
     'baked-potatoes': [
-      { id: 29, name: 'Big Kingz\' Potato', price: 25.00, description: 'Chopped Brisket, Sausage & Ribs, stuffed with butter, cheese, sour cream, chives.', image: '/images/resource/shop/shop-11.jpg', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
-      { id: 30, name: 'Baby Back Rib Potato', price: 25.00, description: 'Ribs, stuffed with butter, cheese, sour cream, chives.', image: '/images/resource/shop/shop-12.jpg', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
-      { id: 31, name: 'St. Louis Style Rib Potato', price: 25.00, description: 'Ribs, stuffed with butter, cheese, sour cream, chives.', image: '/images/resource/shop/shop-13.jpg', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
-      { id: 32, name: 'Lil Kingz\' Chopped Beef Potato', price: 20.00, description: 'Chopped beef, stuffed with butter, cheese, sour cream, chives.', image: '/images/resource/shop/shop-1.jpg', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
-      { id: 33, name: 'Sausage Potato', price: 15.00, description: 'Sausage, stuffed with butter, cheese, sour cream, chives.', image: '/images/resource/shop/shop-2.jpg', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
-      { id: 34, name: 'Chicken Potato', price: 15.00, description: 'Chicken, stuffed with butter, cheese, sour cream, chives.', image: '/images/resource/shop/shop-3.jpg', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' }
+      { id: 29, name: 'Big Kingz\' Potato', price: 25.00, description: 'Chopped Brisket, Sausage & Ribs, stuffed with butter, cheese, sour cream, chives.', image: '/images/menu/shop-11.png', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
+      { id: 30, name: 'Baby Back Rib Potato', price: 25.00, description: 'Ribs, stuffed with butter, cheese, sour cream, chives.', image: '/images/menu/shop-12.png', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
+      { id: 31, name: 'St. Louis Style Rib Potato', price: 25.00, description: 'Ribs, stuffed with butter, cheese, sour cream, chives.', image: '/images/menu/shop-13.png', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
+      { id: 32, name: 'Lil Kingz\' Chopped Beef Potato', price: 20.00, description: 'Chopped beef, stuffed with butter, cheese, sour cream, chives.', image: '/images/menu/shop-1.png', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
+      { id: 33, name: 'Sausage Potato', price: 15.00, description: 'Sausage, stuffed with butter, cheese, sour cream, chives.', image: '/images/menu/shop-2.png', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' },
+      { id: 34, name: 'Chicken Potato', price: 15.00, description: 'Chicken, stuffed with butter, cheese, sour cream, chives.', image: '/images/menu/shop-3.png', category: 'baked-potatoes', prepTime: 0, orderType: 'Quick Cook' }
     ],
     'sides': [
-      { id: 35, name: 'Dirty Rice', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/resource/shop/shop-1.jpg', category: 'sides', prepTime: 0, orderType: 'On Hand' },
-      { id: 36, name: 'Green Beans', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/resource/shop/shop-2.jpg', category: 'sides', prepTime: 0, orderType: 'On Hand' },
-      { id: 37, name: 'Sweet Beans', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/resource/shop/shop-3.jpg', category: 'sides', prepTime: 0, orderType: 'On Hand' },
-      { id: 38, name: 'Pinto Beans', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/resource/shop/shop-4.jpg', category: 'sides', prepTime: 0, orderType: 'On Hand' },
-      { id: 39, name: 'Potato Salad', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/resource/shop/shop-5.jpg', category: 'sides', prepTime: 0, orderType: 'On Hand' },
-      { id: 40, name: 'Broccoli Cheese Rice Casserole', price: 9.50, priceRange: '$9.50 - $95.00', image: '/images/resource/shop/shop-10.jpg', category: 'sides', prepTime: 0, orderType: 'On Hand' }
+      { id: 35, name: 'Dirty Rice', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/menu/shop-1.png', category: 'sides', prepTime: 0, orderType: 'On Hand' },
+      { id: 36, name: 'Green Beans', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/menu/shop-2.png', category: 'sides', prepTime: 0, orderType: 'On Hand' },
+      { id: 37, name: 'Sweet Beans', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/menu/shop-3.png', category: 'sides', prepTime: 0, orderType: 'On Hand' },
+      { id: 38, name: 'Pinto Beans', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/menu/shop-4.png', category: 'sides', prepTime: 0, orderType: 'On Hand' },
+      { id: 39, name: 'Potato Salad', price: 6.00, priceRange: '$6.00 - $15.00', image: '/images/menu/shop-5.png', category: 'sides', prepTime: 0, orderType: 'On Hand' },
+      { id: 40, name: 'Broccoli Cheese Rice Casserole', price: 9.50, priceRange: '$9.50 - $95.00', image: '/images/menu/shop-10.png', category: 'sides', prepTime: 0, orderType: 'On Hand' }
     ],
     'drinks': [
-      { id: 41, name: 'Water', price: 1.00, description: 'Refreshing bottled water.', image: '/images/resource/shop/shop-4.jpg', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 42, name: 'Juice - Mango Punch', price: 3.00, description: 'Kingz\' signature juice flavors.', image: '/images/resource/shop/shop-5.jpg', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 43, name: 'Juice - Fruit Punch', price: 3.00, description: 'Kingz\' signature juice flavors.', image: '/images/resource/shop/shop-10.jpg', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 44, name: 'Juice - Watermelon Punch', price: 3.00, description: 'Kingz\' signature juice flavors.', image: '/images/resource/shop/shop-11.jpg', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 45, name: 'Kingz\' Famous Tea', price: 3.00, description: 'Our signature sweet tea.', image: '/images/resource/shop/shop-12.jpg', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 46, name: 'Pepsi', price: 3.00, description: 'Cold refreshing soda.', image: '/images/resource/shop/shop-13.jpg', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 47, name: 'Mtn Dew', price: 3.00, description: 'Cold refreshing soda.', image: '/images/resource/shop/shop-1.jpg', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 48, name: 'Pepsi Mango', price: 3.00, description: 'Cold refreshing soda.', image: '/images/resource/shop/shop-2.jpg', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 49, name: 'Mtn Dew Code Red', price: 3.00, description: 'Cold refreshing soda.', image: '/images/resource/shop/shop-3.jpg', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 50, name: 'Starry', price: 3.00, description: 'Cold refreshing soda.', image: '/images/resource/shop/shop-4.jpg', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 51, name: 'Mtn Dew Frost Bite', price: 3.00, description: 'Cold refreshing soda.', image: '/images/resource/shop/shop-5.jpg', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 52, name: 'Mug Root Beer', price: 3.00, description: 'Cold refreshing soda.', image: '/images/resource/shop/shop-10.jpg', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
-      { id: 53, name: 'Mtn Dew Pitch Black', price: 3.00, description: 'Cold refreshing soda.', image: '/images/resource/shop/shop-11.jpg', category: 'drinks', prepTime: 0, orderType: 'On Hand' }
+      { id: 41, name: 'Water', price: 1.00, description: 'Refreshing bottled water.', image: '/images/menu/shop-4.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
+      { id: 42, name: 'Juice - Mango Punch', price: 3.00, description: 'Kingz\' signature juice flavors.', image: '/images/menu/shop-5.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
+      { id: 43, name: 'Juice - Fruit Punch', price: 3.00, description: 'Kingz\' signature juice flavors.', image: '/images/menu/shop-10.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
+      { id: 44, name: 'Juice - Watermelon Punch', price: 3.00, description: 'Kingz\' signature juice flavors.', image: '/images/menu/shop-11.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
+      { id: 45, name: 'Kingz\' Famous Tea', price: 3.00, description: 'Our signature sweet tea.', image: '/images/menu/shop-12.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
+      { id: 46, name: 'Pepsi', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-13.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
+      { id: 47, name: 'Mtn Dew', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-1.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
+      { id: 48, name: 'Pepsi Mango', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-2.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
+      { id: 49, name: 'Mtn Dew Code Red', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-3.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
+      { id: 50, name: 'Starry', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-4.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
+      { id: 51, name: 'Mtn Dew Frost Bite', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-5.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
+      { id: 52, name: 'Mug Root Beer', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-10.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' },
+      { id: 53, name: 'Mtn Dew Pitch Black', price: 3.00, description: 'Cold refreshing soda.', image: '/images/menu/shop-11.png', category: 'drinks', prepTime: 0, orderType: 'On Hand' }
     ]
   };
 
@@ -122,8 +123,15 @@ export default function Menu() {
       <div key={item.id} className="col-lg-4 col-md-6 col-sm-12 shop-block">
         <div className="shop-block-one">
           <div className="inner-box">
-            <figure className="image-box">
-              <img src={item.image} alt={item.name} />
+            <figure className="image-box" style={{ position: 'relative', width: '100%', height: '300px' }}>
+              <Image
+                src={item.image}
+                alt={item.name}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                style={{ objectFit: 'cover' }}
+                loading="lazy"
+              />
               {item.prepTime > 0 && (
                 <div style={{
                   position: 'absolute',
@@ -226,7 +234,7 @@ export default function Menu() {
         <div className="header-upper">
           <div className="auto-container">
             <div className="outer-box clearfix">
-              <div className="logo-box">
+                   <div className="logo-box">
                 <figure className="logo"><a href="/"><img src="/images/logo_new.webp" alt="" /></a></figure>
               </div>
               <div className="menu-area pull-right">
@@ -269,7 +277,11 @@ export default function Menu() {
         <div className="sticky-header">
           <div className="auto-container">
             <div className="outer-box clearfix">
-              <figure className="logo-box pull-left"><a href="/"><img src="/images/logo_new.webp" alt="" /></a></figure>
+              <figure className="logo-box pull-left" style={{ position: 'relative', width: '150px', height: '60px' }}>
+                <a href="/">
+                  <Image src="/images/logo_new.webp" alt="Kingz BBQ Logo" fill style={{ objectFit: 'contain' }} priority />
+                </a>
+              </figure>
               <div className="menu-area pull-right">
                 <nav className="main-menu clearfix" style={{marginTop: '15px'}}>
                   {/*Keep This Empty / Menu will come through Javascript*/}
