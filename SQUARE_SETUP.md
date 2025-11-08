@@ -12,10 +12,11 @@ The checkout buttons were not working due to:
 1. **Missing Square Credentials**: Environment variables were set to placeholder values
 2. **SDK Initialization Failures**: Square SDK couldn't initialize without valid credentials
 3. **No Error Feedback**: Users weren't seeing helpful error messages
-4. **Missing NEXT_PUBLIC_ Prefix**: The Square SDK runs in the browser and requires environment variables with the `NEXT_PUBLIC_` prefix to be accessible client-side
 
 ## Fixes Applied
 
+✅ Created server-side API endpoint to provide Square credentials to browser
+✅ All environment variables now server-side only (no NEXT_PUBLIC_ prefix needed)
 ✅ Added credential validation before Square SDK initialization
 ✅ Improved error messages for missing/invalid credentials
 ✅ Fixed Square SDK loading with Next.js Script component
@@ -40,18 +41,19 @@ You'll need these values:
 
 ### Step 3: Update `.env.local`
 
-Open the `.env.local` file in the root of your project and replace the placeholder values:
+Open the `.env.local` file in the root of your project and replace the placeholder values.
+
+**All variables are server-side only (no NEXT_PUBLIC_ prefix)**:
 
 ```bash
-# Server-side credentials
+# Square credentials (all server-side)
 SQUARE_ACCESS_TOKEN=YOUR_SANDBOX_ACCESS_TOKEN_HERE
-SQUARE_ENVIRONMENT=sandbox
+SQUARE_APPLICATION_ID=YOUR_SANDBOX_APPLICATION_ID_HERE
 SQUARE_LOCATION_ID=YOUR_LOCATION_ID_HERE
-
-# Client-side credentials (safe to expose in browser)
-NEXT_PUBLIC_SQUARE_APPLICATION_ID=YOUR_SANDBOX_APPLICATION_ID_HERE
-NEXT_PUBLIC_SQUARE_LOCATION_ID=YOUR_LOCATION_ID_HERE
+SQUARE_ENVIRONMENT=sandbox
 ```
+
+The application automatically exposes only the public credentials (Application ID and Location ID) to the browser via a secure API endpoint.
 
 ### Step 4: Restart Your Development Server
 
@@ -102,19 +104,13 @@ When ready to accept real payments:
 1. Get your **Production** credentials from Square Developer Dashboard
 2. Update **ALL** environment variables in `.env.local`:
    ```bash
-   # Server-side (no NEXT_PUBLIC_ prefix)
    SQUARE_ACCESS_TOKEN=YOUR_PRODUCTION_ACCESS_TOKEN
-   SQUARE_ENVIRONMENT=production
+   SQUARE_APPLICATION_ID=YOUR_PRODUCTION_APPLICATION_ID
    SQUARE_LOCATION_ID=YOUR_PRODUCTION_LOCATION_ID
-
-   # Client-side (with NEXT_PUBLIC_ prefix)
-   NEXT_PUBLIC_SQUARE_APPLICATION_ID=YOUR_PRODUCTION_APPLICATION_ID
-   NEXT_PUBLIC_SQUARE_LOCATION_ID=YOUR_PRODUCTION_LOCATION_ID
-   NEXT_PUBLIC_SQUARE_ENVIRONMENT=production
+   SQUARE_ENVIRONMENT=production
    ```
-3. **Important**: Make sure `SQUARE_ENVIRONMENT` and `NEXT_PUBLIC_SQUARE_ENVIRONMENT` match!
-4. Restart your development server
-5. The Square SDK URL will automatically switch to production mode
+3. Restart your server
+4. The Square SDK will automatically switch to production mode
 
 ## Troubleshooting
 
@@ -137,36 +133,33 @@ When ready to accept real payments:
 ## Security Notes
 
 ⚠️ **NEVER** commit `.env.local` to version control
-⚠️ **NEVER** use `NEXT_PUBLIC_` prefix for access tokens
-✅ Only use `NEXT_PUBLIC_` for Application ID, Location ID, and Environment
-✅ Keep access tokens server-side only
+✅ All environment variables are server-side only (no NEXT_PUBLIC_ prefix)
+✅ Access tokens are kept private on the server
+✅ Only public identifiers (Application ID, Location ID) are exposed to browser
 
-### Why NEXT_PUBLIC_ Prefix is Required
+### How It Works (No NEXT_PUBLIC_ Prefix Needed)
 
-**Important**: The Square Web Payments SDK runs entirely in the browser (client-side). Next.js has two types of environment variables:
+This application uses a server-side API endpoint approach to keep all environment variables private:
 
-1. **Server-side only** (no prefix): Only available in API routes and server components
-2. **Client-side** (with `NEXT_PUBLIC_` prefix): Available in the browser
-
-Since Square SDK initializes in the browser, it **MUST** use `NEXT_PUBLIC_` prefixed variables:
+1. **All credentials stay on the server** - No NEXT_PUBLIC_ prefix needed
+2. **API endpoint exposes only public data** - `/api/square/config` provides Application ID and Location ID
+3. **Access tokens stay private** - Never exposed to the browser
+4. **Secure by default** - Browser only receives what it needs
 
 ```javascript
-// This runs in the browser - requires NEXT_PUBLIC_ prefix
-window.Square.payments(
-  process.env.NEXT_PUBLIC_SQUARE_APPLICATION_ID,  // ✅ Works in browser
-  process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID      // ✅ Works in browser
-);
+// Browser fetches config from server API
+const response = await fetch('/api/square/config');
+const { applicationId, locationId } = await response.json();
+
+// Then initializes Square SDK with fetched config
+window.Square.payments(applicationId, locationId);
 ```
 
-**Without** the `NEXT_PUBLIC_` prefix, these values will be `undefined` in the browser and Square checkout will fail.
-
-**Safe to expose** (use NEXT_PUBLIC_):
-- Application ID (public identifier)
-- Location ID (public identifier)
-- Environment (sandbox/production)
-
-**Keep secret** (NO NEXT_PUBLIC_):
-- Access Token (server-side only, never expose to browser)
+**Server-side only** (all variables):
+- SQUARE_ACCESS_TOKEN (private - never exposed)
+- SQUARE_APPLICATION_ID (public identifier - exposed via API)
+- SQUARE_LOCATION_ID (public identifier - exposed via API)
+- SQUARE_ENVIRONMENT (determines which SDK to load)
 
 ## Need Help?
 
@@ -176,7 +169,17 @@ window.Square.payments(
 
 ## File Changes Made
 
-- `lib/SquareCheckoutModal.js` - Added credential validation and better error handling
-- `app/layout.js` - Fixed Square SDK loading
-- `.env.local` - Created with setup instructions
+- `app/api/square/config/route.js` - New API endpoint to provide Square credentials to browser
+- `lib/SquareCheckoutModal.js` - Fetches credentials from API, added validation and better error handling
+- `app/layout.js` - Fixed Square SDK loading with server-side environment variables
+- `.env.local` - Created with setup instructions (no NEXT_PUBLIC_ prefix needed)
 - `SQUARE_SETUP.md` - This setup guide
+
+## Architecture
+
+The checkout system now uses a secure server-side approach:
+
+1. **Environment Variables** → All stored on server (no NEXT_PUBLIC_)
+2. **API Endpoint** → `/api/square/config` exposes only public credentials
+3. **Client Component** → Fetches config and initializes Square SDK
+4. **Payment Processing** → `/api/square/payment` handles payment on server
