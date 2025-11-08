@@ -65,11 +65,14 @@ function LayoutContent({ children, pathname }) {
         <div className="xs-sidebar-widget" style={{
           maxHeight: '100vh',
           overflowY: 'auto',
-          overflowX: 'hidden'
+          overflowX: 'hidden',
+          pointerEvents: 'auto',
+          position: 'relative',
+          zIndex: 1000000
         }}>
-            <div className="sidebar-widget-container">
+            <div className="sidebar-widget-container" style={{position: 'relative', zIndex: 10}}>
                 <div className="widget-heading">
-                    <a href="#" className="close-side-widget" onClick={(e) => { e.preventDefault(); closeCart(); }}>X</a>
+                    <a href="#" className="close-side-widget" onClick={(e) => { e.preventDefault(); closeCart(); }} style={{pointerEvents: 'auto', position: 'relative', zIndex: 10}}>X</a>
                 </div>
                 <div className="sidebar-textwidget">
                     <div className="sidebar-info-contents">
@@ -122,7 +125,10 @@ function LayoutContent({ children, pathname }) {
                                                   borderRadius: '4px',
                                                   cursor: 'pointer',
                                                   fontSize: '14px',
-                                                  fontWeight: 'bold'
+                                                  fontWeight: 'bold',
+                                                  pointerEvents: 'auto',
+                                                  position: 'relative',
+                                                  zIndex: 10
                                                 }}
                                               >-</button>
                                               <span style={{minWidth: '30px', textAlign: 'center', color: '#fff', fontWeight: 'bold'}}>{item.quantity}</span>
@@ -136,7 +142,10 @@ function LayoutContent({ children, pathname }) {
                                                   borderRadius: '4px',
                                                   cursor: 'pointer',
                                                   fontSize: '14px',
-                                                  fontWeight: 'bold'
+                                                  fontWeight: 'bold',
+                                                  pointerEvents: 'auto',
+                                                  position: 'relative',
+                                                  zIndex: 10
                                                 }}
                                               >+</button>
                                             </div>
@@ -149,7 +158,10 @@ function LayoutContent({ children, pathname }) {
                                                 padding: '6px 12px',
                                                 borderRadius: '4px',
                                                 cursor: 'pointer',
-                                                fontSize: '12px'
+                                                fontSize: '12px',
+                                                pointerEvents: 'auto',
+                                                position: 'relative',
+                                                zIndex: 10
                                               }}
                                             >Remove</button>
                                           </div>
@@ -173,7 +185,10 @@ function LayoutContent({ children, pathname }) {
                                         display: 'block',
                                         padding: '12px',
                                         border: 'none',
-                                        cursor: 'pointer'
+                                        cursor: 'pointer',
+                                        pointerEvents: 'auto',
+                                        position: 'relative',
+                                        zIndex: 10
                                       }}
                                     >
                                       Checkout<i className="fas fa-long-arrow-alt-right"></i>
