@@ -388,7 +388,7 @@ function LayoutContent({ children, pathname }) {
         {/* Floating Cart Button */}
         <button
           onClick={(e) => { e.preventDefault(); toggleCart(); }}
-          className="floating-cart-btn"
+          className="nav-toggler navSidebar-button floating-cart-btn"
           style={{
             position: 'fixed',
             bottom: '100px',
