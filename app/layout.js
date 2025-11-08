@@ -384,6 +384,62 @@ function LayoutContent({ children, pathname }) {
             </div>
         </footer>
         {/* main-footer end */}
+
+        {/* Floating Cart Button */}
+        <button
+          onClick={(e) => { e.preventDefault(); toggleCart(); }}
+          className="floating-cart-btn"
+          style={{
+            position: 'fixed',
+            bottom: '100px',
+            right: '30px',
+            width: '60px',
+            height: '60px',
+            borderRadius: '50%',
+            backgroundColor: '#ff6b35',
+            border: 'none',
+            cursor: 'pointer',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+            zIndex: 99,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+            fontSize: '20px',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'scale(1.1)';
+            e.currentTarget.style.backgroundColor = '#ff5722';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.backgroundColor = '#ff6b35';
+          }}
+        >
+          <i className="flaticon-shopping-cart-1"></i>
+          {getTotalItems() > 0 && (
+            <span style={{
+              position: 'absolute',
+              top: '5px',
+              right: '5px',
+              backgroundColor: '#fff',
+              color: '#ff6b35',
+              borderRadius: '50%',
+              width: '22px',
+              height: '22px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '12px',
+              fontWeight: 'bold',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+            }}>
+              {getTotalItems()}
+            </span>
+          )}
+        </button>
+
         {/*Scroll to top*/}
         <button className="scroll-top scroll-to-target" data-target="html">
             <span className="fa fa-arrow-up"></span>
