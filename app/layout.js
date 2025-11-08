@@ -442,11 +442,11 @@ function LayoutContent({ children, pathname }) {
           </div>
         {/* Square Web Payments SDK - Dynamically load based on environment */}
         <Script
-          src={process.env.NEXT_PUBLIC_SQUARE_ENVIRONMENT === 'production'
+          src={process.env.SQUARE_ENVIRONMENT === 'production'
             ? "https://web.squarecdn.com/v1/square.js"
             : "https://sandbox.web.squarecdn.com/v1/square.js"}
           strategy="beforeInteractive"
-          onLoad={() => console.log(`Square SDK loaded successfully (${process.env.NEXT_PUBLIC_SQUARE_ENVIRONMENT || 'sandbox'} mode)`)}
+          onLoad={() => console.log(`Square SDK loaded successfully (${process.env.SQUARE_ENVIRONMENT || 'sandbox'} mode)`)}
           onError={(e) => console.error('Failed to load Square SDK:', e)}
         />
         <Script src="/js/jquery.js" />
