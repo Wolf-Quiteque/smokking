@@ -65,7 +65,9 @@ function LayoutContent({ children, pathname }) {
         <div className="xs-sidebar-widget" style={{
           maxHeight: '100vh',
           overflowY: 'auto',
-          overflowX: 'hidden'
+          overflowX: 'hidden',
+          position: 'relative',
+          zIndex: 999999999
         }}>
             <div className="sidebar-widget-container">
                 <div className="widget-heading">
