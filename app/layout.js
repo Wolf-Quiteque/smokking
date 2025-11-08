@@ -41,11 +41,6 @@ function LayoutContent({ children, pathname }) {
         {/* Google Fonts */}
         <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;300;400;500;700;800;900&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
-        {/* Square Web Payments SDK */}
-        <script
-          type="text/javascript"
-          src="https://sandbox.web.squarecdn.com/v1/square.js"
-        ></script>
         {/* Stylesheets */}
         <link href="/css/font-awesome-all.css" rel="stylesheet" />
         <link href="/css/flaticon.css" rel="stylesheet" />
@@ -445,6 +440,15 @@ function LayoutContent({ children, pathname }) {
             <span className="fa fa-arrow-up"></span>
         </button>
           </div>
+        {/* Square Web Payments SDK - Dynamically load based on environment */}
+        <Script
+          src={process.env.NEXT_PUBLIC_SQUARE_ENVIRONMENT === 'production'
+            ? "https://web.squarecdn.com/v1/square.js"
+            : "https://sandbox.web.squarecdn.com/v1/square.js"}
+          strategy="beforeInteractive"
+          onLoad={() => console.log(`Square SDK loaded successfully (${process.env.NEXT_PUBLIC_SQUARE_ENVIRONMENT || 'sandbox'} mode)`)}
+          onError={(e) => console.error('Failed to load Square SDK:', e)}
+        />
         <Script src="/js/jquery.js" />
         <Script src="/js/popper.min.js" />
         <Script src="/js/bootstrap.min.js" />
